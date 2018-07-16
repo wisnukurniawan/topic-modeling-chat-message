@@ -68,8 +68,8 @@ class PreprocessingUtils:
         text_list = text.split(' ')
 
         for index in range(len(text_list)):
-            regex = re.match("^https?://berrybenka.com", text_list[index])
-            if regex is not None:
+            rgx = re.match("^https?://berrybenka.com", text_list[index])
+            if rgx is not None:
                 path = urlparse(text_list[index]).path
                 path_list = path.split("/")
                 if path_list[-2].isnumeric():

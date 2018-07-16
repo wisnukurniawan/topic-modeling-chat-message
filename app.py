@@ -130,18 +130,19 @@ def preprocessing_flow(content):
     """
     Preprocessing flow.
     """
-    content = PreprocessingUtilsV2.normalize_emoticon(content, keyword_processor_emoticon)
-    content = PreprocessingUtils.normalize_url(content)
-    content = PreprocessingUtils.remove_url(content)
-    content = PreprocessingUtils.remove_email(content)
-    content = PreprocessingUtils.remove_digit_number(content)
-    content = PreprocessingUtils.case_folding_lowercase(content)
-    content = PreprocessingUtils.remove_punctuation(content)
-    content = PreprocessingUtilsV2.normalize_slang_word(content, keyword_processor_slang_word)
-    content = PreprocessingUtils.remove_unused_character(content)
-    content = PreprocessingUtils.stemming_tokenize_and_remove_stop_word(content, nlp)
-    content = PreprocessingUtils.join_negation(content)
-    content = PreprocessingUtils.removing_extra_space(content)
+    content = PreprocessingUtilsV2.normalize_emoticon(content, keyword_processor_emoticon)  # normalize emoticon
+    content = PreprocessingUtils.normalize_url(content)  # normalize url
+    content = PreprocessingUtils.remove_url(content)  # remove url
+    content = PreprocessingUtils.remove_email(content)  # remove email
+    content = PreprocessingUtils.remove_digit_number(content)  # remove digit number
+    content = PreprocessingUtils.case_folding_lowercase(content)  # case folding lower case
+    content = PreprocessingUtils.remove_punctuation(content)  # remove punctuation
+    content = PreprocessingUtilsV2.normalize_slang_word(content, keyword_processor_slang_word)  # normalize slang word
+    content = PreprocessingUtils.remove_unused_character(content)  # remove unused character
+    content = PreprocessingUtils.stemming_tokenize_and_remove_stop_word(content, nlp)  # stemming, tokenize, remove stop word
+    content = PreprocessingUtils.join_negation(content)  # join negation word
+    content = PreprocessingUtils.removing_extra_space(content)  # remove extra space between word
+
     # TODO add another pre-processing if needed
 
     return content
@@ -162,8 +163,8 @@ def job():
     if message_history_list:
         merchant_name = message_history_list[0].name
         results = cleaning(message_history_list)
-        for result in results:
-            print(result)
+        # for result in results:
+        #     print(result)
 
 
 if __name__ == '__main__':
