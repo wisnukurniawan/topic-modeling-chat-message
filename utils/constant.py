@@ -12,3 +12,20 @@ EMOTICON_LIST = (
 DELIMITER = '_'
 
 NEGATION_WORD = 'tidak'
+
+STOP_WORD = set("""
+oke
+iya
+maaf
+terima
+kasih
+halo
+selamat
+kak
+hai
+cakap
+""".split())
+
+EXC_STOP_WORD = set("""
+tidak
+""".split())

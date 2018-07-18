@@ -17,30 +17,54 @@ from utils import constant
 nlp = Indonesian()
 
 # init flash text
-# build slang word corpus
 keyword_processor_slang_word = KeywordProcessor()
-slang_words_raw = pandas.read_csv('resource/slang_word_list.csv', sep=',')
-for word in slang_words_raw.values:
-    keyword_processor_slang_word.add_keyword(word[0], word[1])
-
-# build emoticon corpus
 keyword_processor_emoticon = KeywordProcessor()
-emoticon_raw = constant.EMOTICON_LIST
-for key, values in emoticon_raw:
-    for value in values:
-        keyword_processor_emoticon.add_keyword(value, key)
 
 # init logger
 logger = logging.getLogger("goliath")
-formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-logfile_handler = logging.StreamHandler(stream=sys.stdout)
-logfile_handler.setFormatter(formatter)
-logger.setLevel(logging.DEBUG)
-logger.addHandler(logfile_handler)
 
 merchant_name = ""
 current_month = ""
 current_year = ""
+
+
+def init_logger():
+    """
+    Init logger.
+    """
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    logfile_handler = logging.StreamHandler(stream=sys.stdout)
+    logfile_handler.setFormatter(formatter)
+    logger.setLevel(logging.DEBUG)
+    logger.addHandler(logfile_handler)
+
+
+def init_flash_text_corpus():
+    """
+    Init flash text corpus.
+    """
+    # build slang word corpus
+    slang_words_raw = pandas.read_csv('resource/slang_word_list.csv', sep=',')
+    for word in slang_words_raw.values:
+        keyword_processor_slang_word.add_keyword(word[0], word[1])
+
+    # build emoticon corpus
+    emoticon_raw = constant.EMOTICON_LIST
+    for key, values in emoticon_raw:
+        for value in values:
+            keyword_processor_emoticon.add_keyword(value, key)
+
+
+def init_custom_stop_word():
+    """
+    Custom stop word for chat message content.
+    """
+
+    for stop_word in constant.STOP_WORD:
+        nlp.vocab[stop_word].is_stop = True
+
+    for stop_word in constant.EXC_STOP_WORD:
+        nlp.vocab[stop_word].is_stop = False
 
 
 def get_chat_message_history(month, year):
@@ -130,18 +154,41 @@ def preprocessing_flow(content):
     """
     Preprocessing flow.
     """
-    content = PreprocessingUtilsV2.normalize_emoticon(content, keyword_processor_emoticon)  # normalize emoticon
-    content = PreprocessingUtils.normalize_url(content)  # normalize url
-    content = PreprocessingUtils.remove_url(content)  # remove url
-    content = PreprocessingUtils.remove_email(content)  # remove email
-    content = PreprocessingUtils.remove_digit_number(content)  # remove digit number
-    content = PreprocessingUtils.case_folding_lowercase(content)  # case folding lower case
-    content = PreprocessingUtils.remove_punctuation(content)  # remove punctuation
-    content = PreprocessingUtilsV2.normalize_slang_word(content, keyword_processor_slang_word)  # normalize slang word
-    content = PreprocessingUtils.remove_unused_character(content)  # remove unused character
-    content = PreprocessingUtils.stemming_tokenize_and_remove_stop_word(content, nlp)  # stemming, tokenize, remove stop word
-    content = PreprocessingUtils.join_negation(content)  # join negation word
-    content = PreprocessingUtils.removing_extra_space(content)  # remove extra space between word
+    # normalize emoticon
+    content = PreprocessingUtilsV2.normalize_emoticon(content, keyword_processor_emoticon)
+
+    # normalize url
+    content = PreprocessingUtils.normalize_url(content)
+
+    # remove url
+    content = PreprocessingUtils.remove_url(content)
+
+    # remove email
+    content = PreprocessingUtils.remove_email(content)
+
+    # remove digit number
+    content = PreprocessingUtils.remove_digit_number(content)
+
+    # case folding lower case
+    content = PreprocessingUtils.case_folding_lowercase(content)
+
+    # remove punctuation
+    content = PreprocessingUtils.remove_punctuation(content)
+
+    # normalize slang word
+    content = PreprocessingUtilsV2.normalize_slang_word(content, keyword_processor_slang_word)
+
+    # remove unused character
+    content = PreprocessingUtils.remove_unused_character(content)
+
+    # stemming, tokenize, remove stop word
+    content = PreprocessingUtils.stemming_tokenize_and_remove_stop_word(content, nlp)
+
+    # join negation word
+    content = PreprocessingUtils.join_negation(content)
+
+    # remove extra space between word
+    content = PreprocessingUtils.removing_extra_space(content)
 
     # TODO add another pre-processing if needed
 
@@ -163,12 +210,16 @@ def job():
     if message_history_list:
         merchant_name = message_history_list[0].name
         results = cleaning(message_history_list)
-        # for result in results:
-        #     print(result)
+        for result in results:
+            print(result.content)
 
 
 if __name__ == '__main__':
+    init_logger()
+    init_custom_stop_word()
+    init_flash_text_corpus()
     # schedule.every().day.at("02:00").do(job)
+    # schedule.every(5).seconds.do(job)
     job()
 
     # while True:

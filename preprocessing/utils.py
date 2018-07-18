@@ -2,7 +2,6 @@ import re
 from urllib.parse import urlparse
 
 import pandas
-from spacy.lang.id.stop_words import STOP_WORDS
 
 from utils import constant
 
@@ -114,7 +113,7 @@ class PreprocessingUtils:
         """
         Remove all punctuation in text.
         """
-        return re.sub(r'[^\s\w]', '', text)
+        return re.sub(r'[^\s\w]', ' ', text)
 
     @staticmethod
     def remove_digit_number(text):
@@ -152,7 +151,7 @@ class PreprocessingUtils:
 
         # remove stop words
         for word in text_list:
-            if word not in STOP_WORDS:
+            if not nlp.vocab[word].is_stop:
                 text_list_temp.append(word)
 
         return ' '.join(text_list_temp)
