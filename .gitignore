@@ -1,0 +1,6 @@
+# Datasource
+resource/dataset/
+resource/example/
+
+# Idea files
+.idea/*
