@@ -178,11 +178,11 @@ def preprocessing_flow(content):
     # normalize slang word
     content = PreprocessingUtilsV2.normalize_slang_word(content, keyword_processor_slang_word)
 
-    # remove unused character
-    content = PreprocessingUtils.remove_unused_character(content)
-
     # stemming, tokenize, remove stop word
     content = PreprocessingUtils.stemming_tokenize_and_remove_stop_word(content, nlp)
+
+    # remove unused character
+    content = PreprocessingUtils.remove_unused_character(content)
 
     # join negation word
     content = PreprocessingUtils.join_negation(content)

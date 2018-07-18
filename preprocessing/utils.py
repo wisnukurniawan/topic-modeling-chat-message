@@ -92,7 +92,7 @@ class PreprocessingUtils:
         text_list_temp = []
 
         for index in range(len(text_list)):
-            if len(text_list[index]) > 2:
+            if len(text_list[index]) > 3:
                 text_list_temp.append(text_list[index])
 
         return ' '.join(text_list_temp)
