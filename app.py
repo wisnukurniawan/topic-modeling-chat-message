@@ -5,11 +5,12 @@ from datetime import datetime
 from multiprocessing import cpu_count
 
 import pandas
-import gensim
-from gensim import models
+from gensim.corpora import Dictionary
+from gensim.models import TfidfModel, LdaMulticore, CoherenceModel
 
 from model.chat_message import ChatMessage
 from preprocessing.preprocessing import Preprocessing
+from utils.constant import NUM_TOPICS
 
 # init logger
 logger = logging.getLogger("goliath")
@@ -75,17 +76,33 @@ def job():
         for result in results:
             documents.append(result.content.split())
 
-        dictionary = gensim.corpora.Dictionary(documents)
-        document_term_matrix = [dictionary.doc2bow(document) for document in documents]
-        tfidf = models.TfidfModel(document_term_matrix)
-        corpus_tfidf = tfidf[document_term_matrix]
+        dictionary = Dictionary(documents)
+        bow_corpus = [dictionary.doc2bow(document) for document in documents]
+        tfidf = TfidfModel(bow_corpus)
+        corpus_tfidf = tfidf[bow_corpus]
 
-        lda_model = gensim.models.LdaMulticore(corpus_tfidf,
-                                               num_topics=10,
-                                               id2word=dictionary,
-                                               passes=2,
-                                               workers=cpu_count())
+        coherence_scores = []
+        for num_topic in range(NUM_TOPICS):
+            lda_model = LdaMulticore(corpus_tfidf,
+                                     num_topics=num_topic + 1,
+                                     id2word=dictionary,
+                                     passes=2,
+                                     workers=cpu_count())
 
+            coherence_model_lda = CoherenceModel(model=lda_model,
+                                                 texts=documents,
+                                                 corpus=bow_corpus,
+                                                 coherence='c_v')
+            coherence_score = coherence_model_lda.get_coherence()
+            coherence_scores.append(coherence_score)
+
+        best_num_of_topics = coherence_scores.index(max(coherence_scores)) + 1
+        print("Best num of topics: ", best_num_of_topics)
+        lda_model = LdaMulticore(corpus_tfidf,
+                                 num_topics=best_num_of_topics,
+                                 id2word=dictionary,
+                                 passes=2,
+                                 workers=cpu_count())
         topic_terms = []
         for topic in lda_model.print_topics(-1):
             lda_model_topic_terms_dict = {}
