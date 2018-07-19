@@ -110,17 +110,17 @@ def job():
             topic_terms.append(lda_model_topic_terms_dict)
 
         # save into DB
-        for index, topic_term in enumerate(topic_terms):
+        for topic_pos, topic_term in enumerate(topic_terms):
             for k, v in topic_term.items():
                 logger.info(
-                    f'Topic Cluster: {index + 1}, '
+                    f'Topic Cluster: {topic_pos + 1}, '
                     f'Word: {k}, '
                     f'Score: {v}, '
                     f'Merchant: {merchant_name}, '
                     f'Year: {current_year}, '
                     f'Month: {current_month}'
                 )
-                data_manager.insert_into_online_shop(topic_cluster=index + 1,
+                data_manager.insert_into_online_shop(topic_cluster=topic_pos + 1,
                                                      word=k,
                                                      score=v,
                                                      merchant_name=merchant_name,
