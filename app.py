@@ -95,7 +95,7 @@ def job():
                                                  coherence='c_v')
             coherence_score = coherence_model_lda.get_coherence()
             lda_models_with_coherence_score[coherence_score] = lda_model
-            print("\nCoherence score: ", coherence_score)
+            logger.info(f'Coherence score: {coherence_score}')
 
         lda_model = lda_models_with_coherence_score[max(lda_models_with_coherence_score)]
         topic_terms = []
