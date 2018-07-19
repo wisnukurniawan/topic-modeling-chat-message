@@ -2,8 +2,11 @@ import logging
 import sys
 import schedule
 from datetime import datetime
+from multiprocessing import cpu_count
 
 import pandas
+import gensim
+from gensim import models
 
 from model.chat_message import ChatMessage
 from preprocessing.preprocessing import Preprocessing
@@ -67,8 +70,32 @@ def job():
     if message_history_list:
         merchant_name = message_history_list[0].name
         results = preprocessing.cleaning(message_history_list)
+
+        documents = []
         for result in results:
-            print(result.content)
+            documents.append(result.content.split())
+
+        dictionary = gensim.corpora.Dictionary(documents)
+        document_term_matrix = [dictionary.doc2bow(document) for document in documents]
+        tfidf = models.TfidfModel(document_term_matrix)
+        corpus_tfidf = tfidf[document_term_matrix]
+
+        lda_model = gensim.models.LdaMulticore(corpus_tfidf,
+                                               num_topics=10,
+                                               id2word=dictionary,
+                                               passes=2,
+                                               workers=cpu_count())
+
+        topic_terms = []
+        for topic in lda_model.print_topics(-1):
+            lda_model_topic_terms_dict = {}
+            for k, v in lda_model.get_topic_terms(topic[0]):
+                lda_model_topic_terms_dict[dictionary[k]] = v
+            topic_terms.append(lda_model_topic_terms_dict)
+
+        for index, topic_term in enumerate(topic_terms):
+            for k, v in topic_term.items():
+                print('Index: {} Word: {} Frekuensi: {}'.format(index, k, v))
 
 
 if __name__ == '__main__':

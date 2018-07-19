@@ -22,7 +22,7 @@ class Preprocessing(object):
         self.logger = logger
 
         self.__init_flash_text_corpus()
-        self.__init_flash_text_corpus()
+        self.__init_custom_stop_word()
 
     def __init_flash_text_corpus(self):
         """
