@@ -81,7 +81,7 @@ def job():
         tfidf = TfidfModel(bow_corpus)
         corpus_tfidf = tfidf[bow_corpus]
 
-        coherence_scores = []
+        lda_models_with_coherence_score = {}
         for num_topic in range(NUM_TOPICS):
             lda_model = LdaMulticore(corpus_tfidf,
                                      num_topics=num_topic + 1,
@@ -94,15 +94,10 @@ def job():
                                                  corpus=bow_corpus,
                                                  coherence='c_v')
             coherence_score = coherence_model_lda.get_coherence()
-            coherence_scores.append(coherence_score)
+            lda_models_with_coherence_score[coherence_score] = lda_model
+            print("\nCoherence score: ", coherence_score)
 
-        best_num_of_topics = coherence_scores.index(max(coherence_scores)) + 1
-        print("Best num of topics: ", best_num_of_topics)
-        lda_model = LdaMulticore(corpus_tfidf,
-                                 num_topics=best_num_of_topics,
-                                 id2word=dictionary,
-                                 passes=2,
-                                 workers=cpu_count())
+        lda_model = lda_models_with_coherence_score[max(lda_models_with_coherence_score)]
         topic_terms = []
         for topic in lda_model.print_topics(-1):
             lda_model_topic_terms_dict = {}
@@ -112,7 +107,7 @@ def job():
 
         for index, topic_term in enumerate(topic_terms):
             for k, v in topic_term.items():
-                print('Index: {} Word: {} Frekuensi: {}'.format(index, k, v))
+                print('Index: {} Word: {} Frekuensi: {}'.format(index + 1, k, v))
 
 
 if __name__ == '__main__':
