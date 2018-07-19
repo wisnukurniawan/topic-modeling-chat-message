@@ -58,6 +58,7 @@ def get_chat_message_history(month, year):
 
 
 def job():
+    """ Function to be scheduling. """
     merchant_name = ""
     current_date = datetime.now().date()
     current_month = datetime.now().month
@@ -79,14 +80,14 @@ def job():
         # build bag of words
         bow_corpus = [dictionary.doc2bow(document) for document in documents]
 
-        # calculate tfidf
-        tfidf = TfidfModel(bow_corpus)
-        corpus_tfidf = tfidf[bow_corpus]
+        # calculate tf idf
+        tf_idf = TfidfModel(bow_corpus)
+        corpus_tf_idf = tf_idf[bow_corpus]
 
         # find highest coherence score
         lda_models_with_coherence_score = {}
         for num_topic in range(NUM_TOPICS):
-            lda_model = LdaMulticore(corpus_tfidf,
+            lda_model = LdaMulticore(corpus_tf_idf,
                                      num_topics=num_topic + 1,
                                      id2word=dictionary,
                                      passes=2,
@@ -111,18 +112,18 @@ def job():
 
         # save into DB
         for topic_pos, topic_term in enumerate(topic_terms):
-            for k, v in topic_term.items():
+            for word, score in topic_term.items():
                 logger.info(
                     f'Topic Cluster: {topic_pos + 1}, '
-                    f'Word: {k}, '
-                    f'Score: {v}, '
+                    f'Word: {word}, '
+                    f'Score: {score}, '
                     f'Merchant: {merchant_name}, '
                     f'Year: {current_year}, '
                     f'Month: {current_month}'
                 )
                 data_manager.insert_into_online_shop(topic_cluster=topic_pos + 1,
-                                                     word=k,
-                                                     score=v,
+                                                     word=word,
+                                                     score=score,
                                                      merchant_name=merchant_name,
                                                      year=current_year,
                                                      month=current_month)

@@ -24,7 +24,7 @@ class DataManager(object):
 
     @staticmethod
     def connector():
-        """ Connect to MySQL database """
+        """ Connect to MySQL database. """
 
         # init db connection
         config = {
