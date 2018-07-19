@@ -1,3 +1,4 @@
+mysql-connector-python
 schedule
 flashtext==2.7
 spacy==2.0.11

@@ -11,8 +11,10 @@ from gensim.models import TfidfModel, LdaMulticore, CoherenceModel
 from model.chat_message import ChatMessage
 from preprocessing.preprocessing import Preprocessing
 from utils.constant import NUM_TOPICS
+from database.data_manager import DataManager
+from settings.env_config import set_default_config
 
-# init logger
+# init Logger
 logger = logging.getLogger("goliath")
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 logfile_handler = logging.StreamHandler(stream=sys.stdout)
@@ -22,6 +24,9 @@ logger.addHandler(logfile_handler)
 
 # init our Preprocessing
 preprocessing = Preprocessing(logger)
+
+# init DataManager
+data_manager = DataManager(logger)
 
 
 def get_chat_message_history(month, year):
@@ -68,7 +73,7 @@ def job():
         results = preprocessing.cleaning(message_history_list)
 
         # build documents
-        documents = [result.content.split() for result in results ]
+        documents = [result.content.split() for result in results]
         dictionary = Dictionary(documents)
 
         # build bag of words
@@ -105,21 +110,31 @@ def job():
             topic_terms.append(lda_model_topic_terms_dict)
 
         # save into DB
-        for index, topic_term in enumerate(topic_terms):
+        for topic_pos, topic_term in enumerate(topic_terms):
             for k, v in topic_term.items():
                 logger.info(
-                    f'Index: {index + 1}, '
+                    f'Topic Cluster: {topic_pos + 1}, '
                     f'Word: {k}, '
-                    f'Frequency: {v}, '
+                    f'Score: {v}, '
                     f'Merchant: {merchant_name}, '
                     f'Year: {current_year}, '
                     f'Month: {current_month}'
                 )
+                data_manager.insert_into_online_shop(topic_cluster=topic_pos + 1,
+                                                     word=k,
+                                                     score=v,
+                                                     merchant_name=merchant_name,
+                                                     year=current_year,
+                                                     month=current_month)
 
 
 if __name__ == '__main__':
     # schedule.every().day.at("02:00").do(job)
     # schedule.every(5).seconds.do(job)
+    set_default_config()
+    data_manager.create_database()
+    data_manager.create_tables()
+
     job()
 
     # while True:
