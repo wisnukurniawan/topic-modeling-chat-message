@@ -23,10 +23,6 @@ logger.addHandler(logfile_handler)
 # init our Preprocessing
 preprocessing = Preprocessing(logger)
 
-merchant_name = ""
-current_month = ""
-current_year = ""
-
 
 def get_chat_message_history(month, year):
     """
@@ -57,10 +53,7 @@ def get_chat_message_history(month, year):
 
 
 def job():
-    global current_month
-    global current_year
-    global merchant_name
-
+    merchant_name = ""
     current_date = datetime.now().date()
     current_month = datetime.now().month
     current_year = datetime.now().year
@@ -116,7 +109,14 @@ def job():
         # save into DB
         for index, topic_term in enumerate(topic_terms):
             for k, v in topic_term.items():
-                logger.info(f'Index: {index + 1} Word: {k} Frekuensi: {v}')
+                logger.info(
+                    f'Index: {index + 1}, '
+                    f'Word: {k}, '
+                    f'Frequency: {v}, '
+                    f'Merchant: {merchant_name}, '
+                    f'Year: {current_year}, '
+                    f'Month: {current_month}'
+                )
 
 
 if __name__ == '__main__':
