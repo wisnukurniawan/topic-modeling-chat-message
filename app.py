@@ -10,6 +10,11 @@ from preprocessing.preprocessing import Preprocessing
 
 # init logger
 logger = logging.getLogger("goliath")
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+logfile_handler = logging.StreamHandler(stream=sys.stdout)
+logfile_handler.setFormatter(formatter)
+logger.setLevel(logging.DEBUG)
+logger.addHandler(logfile_handler)
 
 # init our Preprocessing
 preprocessing = Preprocessing(logger)
@@ -17,17 +22,6 @@ preprocessing = Preprocessing(logger)
 merchant_name = ""
 current_month = ""
 current_year = ""
-
-
-def init_logger():
-    """
-    Init logger.
-    """
-    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-    logfile_handler = logging.StreamHandler(stream=sys.stdout)
-    logfile_handler.setFormatter(formatter)
-    logger.setLevel(logging.DEBUG)
-    logger.addHandler(logfile_handler)
 
 
 def get_chat_message_history(month, year):
@@ -78,7 +72,6 @@ def job():
 
 
 if __name__ == '__main__':
-    init_logger()
     # schedule.every().day.at("02:00").do(job)
     # schedule.every(5).seconds.do(job)
     job()

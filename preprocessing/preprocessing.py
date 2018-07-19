@@ -21,10 +21,10 @@ class Preprocessing(object):
         # init logger
         self.logger = logger
 
-        self.init_custom_stop_word()
-        self.init_flash_text_corpus()
+        self.__init_flash_text_corpus()
+        self.__init_flash_text_corpus()
 
-    def init_flash_text_corpus(self):
+    def __init_flash_text_corpus(self):
         """
         Init flash text corpus.
         """
@@ -39,7 +39,7 @@ class Preprocessing(object):
             for value in values:
                 self.keyword_processor_emoticon.add_keyword(value, key)
 
-    def init_custom_stop_word(self):
+    def __init_custom_stop_word(self):
         """
         Custom stop word for chat message content.
         """
@@ -54,7 +54,6 @@ class Preprocessing(object):
         """
         Pre-processing the content from ChatMessage.
 
-        :param logger: for logging
         :param chat_message_list: dirty content from list of ChatMessage.
         :return: observable list of ChatMessage.
         """
@@ -65,7 +64,7 @@ class Preprocessing(object):
             start_time = time.time()
 
             for chat_message in chat_message_list:
-                content = self.preprocessing_flow(chat_message.content)
+                content = self.__preprocessing_flow(chat_message.content)
                 chat_message.content = content
                 if content.strip():
                     chat_message_list_temp.append(chat_message)
@@ -81,7 +80,6 @@ class Preprocessing(object):
         [DEPRECATED]
         Pre-processing the content from ChatMessage with multi threading from spaCy.
 
-        :param logger: for logging
         :param chat_message_list: dirty content from list of ChatMessage.
         :return: observable list of ChatMessage.
         """
@@ -96,7 +94,7 @@ class Preprocessing(object):
                 chat_content_list.append(chat_message.content)
 
             for content in self.nlp.pipe(chat_content_list, n_threads=cpu_count()):
-                chat_message_list[index].content = self.preprocessing_flow(content.text)
+                chat_message_list[index].content = self.__preprocessing_flow(content.text)
                 index = index + 1
 
             self.logger.info(f'Pre-processing finished. {time.time() - start_time} seconds')
@@ -105,7 +103,7 @@ class Preprocessing(object):
 
         return chat_message_list
 
-    def preprocessing_flow(self, content):
+    def __preprocessing_flow(self, content):
         """
         Preprocessing flow.
         """
