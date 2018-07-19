@@ -70,17 +70,24 @@ def job():
 
     if message_history_list:
         merchant_name = message_history_list[0].name
+
+        # cleaning chat text
         results = preprocessing.cleaning(message_history_list)
 
+        # build documents
         documents = []
         for result in results:
             documents.append(result.content.split())
-
         dictionary = Dictionary(documents)
+
+        # build bag of words
         bow_corpus = [dictionary.doc2bow(document) for document in documents]
+
+        # calculate tfidf
         tfidf = TfidfModel(bow_corpus)
         corpus_tfidf = tfidf[bow_corpus]
 
+        # find highest coherence score
         lda_models_with_coherence_score = {}
         for num_topic in range(NUM_TOPICS):
             lda_model = LdaMulticore(corpus_tfidf,
@@ -97,6 +104,7 @@ def job():
             lda_models_with_coherence_score[coherence_score] = lda_model
             logger.info(f'Coherence score: {coherence_score}')
 
+        # running the best lda model based on highest coherence score
         lda_model = lda_models_with_coherence_score[max(lda_models_with_coherence_score)]
         topic_terms = []
         for topic in lda_model.print_topics(-1):
@@ -105,6 +113,7 @@ def job():
                 lda_model_topic_terms_dict[dictionary[k]] = v
             topic_terms.append(lda_model_topic_terms_dict)
 
+        # save into DB
         for index, topic_term in enumerate(topic_terms):
             for k, v in topic_term.items():
                 print('Index: {} Word: {} Frekuensi: {}'.format(index + 1, k, v))
