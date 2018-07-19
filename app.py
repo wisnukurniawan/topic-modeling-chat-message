@@ -23,10 +23,6 @@ logger.addHandler(logfile_handler)
 # init our Preprocessing
 preprocessing = Preprocessing(logger)
 
-merchant_name = ""
-current_month = ""
-current_year = ""
-
 
 def get_chat_message_history(month, year):
     """
@@ -57,10 +53,7 @@ def get_chat_message_history(month, year):
 
 
 def job():
-    global current_month
-    global current_year
-    global merchant_name
-
+    merchant_name = ""
     current_date = datetime.now().date()
     current_month = datetime.now().month
     current_year = datetime.now().year
@@ -70,18 +63,23 @@ def job():
 
     if message_history_list:
         merchant_name = message_history_list[0].name
+
+        # cleaning chat text
         results = preprocessing.cleaning(message_history_list)
 
-        documents = []
-        for result in results:
-            documents.append(result.content.split())
-
+        # build documents
+        documents = [result.content.split() for result in results ]
         dictionary = Dictionary(documents)
+
+        # build bag of words
         bow_corpus = [dictionary.doc2bow(document) for document in documents]
+
+        # calculate tfidf
         tfidf = TfidfModel(bow_corpus)
         corpus_tfidf = tfidf[bow_corpus]
 
-        coherence_scores = []
+        # find highest coherence score
+        lda_models_with_coherence_score = {}
         for num_topic in range(NUM_TOPICS):
             lda_model = LdaMulticore(corpus_tfidf,
                                      num_topics=num_topic + 1,
@@ -94,15 +92,11 @@ def job():
                                                  corpus=bow_corpus,
                                                  coherence='c_v')
             coherence_score = coherence_model_lda.get_coherence()
-            coherence_scores.append(coherence_score)
+            lda_models_with_coherence_score[coherence_score] = lda_model
+            logger.info(f'Coherence score: {coherence_score}')
 
-        best_num_of_topics = coherence_scores.index(max(coherence_scores)) + 1
-        print("Best num of topics: ", best_num_of_topics)
-        lda_model = LdaMulticore(corpus_tfidf,
-                                 num_topics=best_num_of_topics,
-                                 id2word=dictionary,
-                                 passes=2,
-                                 workers=cpu_count())
+        # running the best lda model based on highest coherence score
+        lda_model = lda_models_with_coherence_score[max(lda_models_with_coherence_score)]
         topic_terms = []
         for topic in lda_model.print_topics(-1):
             lda_model_topic_terms_dict = {}
@@ -110,9 +104,17 @@ def job():
                 lda_model_topic_terms_dict[dictionary[k]] = v
             topic_terms.append(lda_model_topic_terms_dict)
 
+        # save into DB
         for index, topic_term in enumerate(topic_terms):
             for k, v in topic_term.items():
-                print('Index: {} Word: {} Frekuensi: {}'.format(index, k, v))
+                logger.info(
+                    f'Index: {index + 1}, '
+                    f'Word: {k}, '
+                    f'Frequency: {v}, '
+                    f'Merchant: {merchant_name}, '
+                    f'Year: {current_year}, '
+                    f'Month: {current_month}'
+                )
 
 
 if __name__ == '__main__':
