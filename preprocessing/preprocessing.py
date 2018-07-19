@@ -87,12 +87,9 @@ class Preprocessing(object):
         if chat_message_list:
             self.logger.info('Pre-processing started...')
             start_time = time.time()
-            chat_content_list = []
             index = 0
 
-            for chat_message in chat_message_list:
-                chat_content_list.append(chat_message.content)
-
+            chat_content_list = [chat_message.content for chat_message in chat_message_list]
             for content in self.nlp.pipe(chat_content_list, n_threads=cpu_count()):
                 chat_message_list[index].content = self.__preprocessing_flow(content.text)
                 index = index + 1

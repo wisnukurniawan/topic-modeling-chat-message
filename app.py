@@ -68,9 +68,7 @@ def job():
         results = preprocessing.cleaning(message_history_list)
 
         # build documents
-        documents = []
-        for result in results:
-            documents.append(result.content.split())
+        documents = [result.content.split() for result in results ]
         dictionary = Dictionary(documents)
 
         # build bag of words
