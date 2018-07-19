@@ -28,9 +28,9 @@ class DataManager(object):
 
         # init db connection
         config = {
-            'user': 'root',
-            'password': '',
-            'host': '127.0.0.1',
+            'user': environ.get('MYSQL_USER'),
+            'password': environ.get('MYSQL_PASS'),
+            'host': environ.get('MYSQL_HOST'),
             'database': environ.get('MYSQL_DB'),
             'raise_on_warnings': True,
             'use_pure': False,
