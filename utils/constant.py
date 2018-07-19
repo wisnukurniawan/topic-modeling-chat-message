@@ -24,6 +24,9 @@ selamat
 kak
 hai
 cakap
+nya
+kali
+biar
 """.split())
 
 EXC_STOP_WORD = set("""

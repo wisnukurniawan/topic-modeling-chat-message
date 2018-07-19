@@ -2,6 +2,7 @@ aj,saja
 ajk,ajak
 alm,almarhum
 almt,alamat
+alaamat,alamat
 ank,anak
 ap,apa
 aq,saya
@@ -91,7 +92,9 @@ cr,cara
 cth,contoh
 cuekin,cuek
 da,ada
-dah ,sudah
+dah,sudah
+udh,sudah
+udha,sudah
 dg,dengan
 dgn,dengan
 dikit,sedikit
@@ -354,6 +357,8 @@ slsa,selasa
 slse,selesai
 slu,selalu
 sm,sama
+ampe,sampai
+sampe,sampai
 smg,semoga
 smngt,semangat
 smp,sampai
@@ -398,6 +403,7 @@ tgl,tanggal
 tgs,tugas
 thn,tahun
 thx,terima kasih
+tnx,terima kasih
 ti2,hati-hati
 tidk,tidak
 tinggl,tinggal
@@ -1267,6 +1273,7 @@ sinetron,sinema elektronik
 sip,oke
 siramin,siramkan
 sis,kak
+sista,kak
 skali,sekali
 skalian,sekalian
 skl,sekali
@@ -1442,12 +1449,16 @@ okeyy,oke
 bkti,bukti
 trnsfr,transfer
 dskon,diskon
+disc,diskon
 prmo,promo
 wa,whatsapp
 lgsng,langsung
 ig,instagram
 yaah,kecewa
 yah,kecewa
+yahh,kecewa
+yahhh,kecewa
+yaahh,kecewa
 yaaah,kecewa
 nyampe,sampai
 sz,ukuran
@@ -1542,3 +1553,4 @@ ka,kak
 rp,rupiah
 idr,rupiah
 okee,oke
+dear,kepada
