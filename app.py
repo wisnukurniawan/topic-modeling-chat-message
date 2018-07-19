@@ -116,7 +116,7 @@ def job():
         # save into DB
         for index, topic_term in enumerate(topic_terms):
             for k, v in topic_term.items():
-                print('Index: {} Word: {} Frekuensi: {}'.format(index + 1, k, v))
+                logger.info(f'Index: {index + 1} Word: {k} Frekuensi: {v}')
 
 
 if __name__ == '__main__':
