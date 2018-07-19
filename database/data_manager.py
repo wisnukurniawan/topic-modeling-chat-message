@@ -43,7 +43,6 @@ class DataManager(object):
         cursor = connector.cursor()
 
         try:
-            print(environ.get('MYSQL_DB'))
             connector.database = environ.get('MYSQL_DB')
         except mysql.connector.Error as err:
             if err.errno == errorcode.ER_BAD_DB_ERROR:
@@ -96,9 +95,11 @@ class DataManager(object):
             'year': year,
             'month': month,
         }
+        try:
+            cursor.execute(add_data_query, data)
+            connector.commit()
+        except mysql.connector.Error:
+            connector.rollback()
 
-        cursor.execute(add_data_query, data)
-
-        connector.commit()
         cursor.close()
         connector.close()
