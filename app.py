@@ -2,11 +2,15 @@ import logging
 import sys
 import schedule
 from datetime import datetime
+from multiprocessing import cpu_count
 
 import pandas
+from gensim.corpora import Dictionary
+from gensim.models import TfidfModel, LdaMulticore, CoherenceModel
 
 from model.chat_message import ChatMessage
 from preprocessing.preprocessing import Preprocessing
+from utils.constant import NUM_TOPICS
 
 # init logger
 logger = logging.getLogger("goliath")
@@ -67,8 +71,48 @@ def job():
     if message_history_list:
         merchant_name = message_history_list[0].name
         results = preprocessing.cleaning(message_history_list)
+
+        documents = []
         for result in results:
-            print(result.content)
+            documents.append(result.content.split())
+
+        dictionary = Dictionary(documents)
+        bow_corpus = [dictionary.doc2bow(document) for document in documents]
+        tfidf = TfidfModel(bow_corpus)
+        corpus_tfidf = tfidf[bow_corpus]
+
+        coherence_scores = []
+        for num_topic in range(NUM_TOPICS):
+            lda_model = LdaMulticore(corpus_tfidf,
+                                     num_topics=num_topic + 1,
+                                     id2word=dictionary,
+                                     passes=2,
+                                     workers=cpu_count())
+
+            coherence_model_lda = CoherenceModel(model=lda_model,
+                                                 texts=documents,
+                                                 corpus=bow_corpus,
+                                                 coherence='c_v')
+            coherence_score = coherence_model_lda.get_coherence()
+            coherence_scores.append(coherence_score)
+
+        best_num_of_topics = coherence_scores.index(max(coherence_scores)) + 1
+        print("Best num of topics: ", best_num_of_topics)
+        lda_model = LdaMulticore(corpus_tfidf,
+                                 num_topics=best_num_of_topics,
+                                 id2word=dictionary,
+                                 passes=2,
+                                 workers=cpu_count())
+        topic_terms = []
+        for topic in lda_model.print_topics(-1):
+            lda_model_topic_terms_dict = {}
+            for k, v in lda_model.get_topic_terms(topic[0]):
+                lda_model_topic_terms_dict[dictionary[k]] = v
+            topic_terms.append(lda_model_topic_terms_dict)
+
+        for index, topic_term in enumerate(topic_terms):
+            for k, v in topic_term.items():
+                print('Index: {} Word: {} Frekuensi: {}'.format(index, k, v))
 
 
 if __name__ == '__main__':

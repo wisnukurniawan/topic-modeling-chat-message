@@ -11,6 +11,8 @@ EMOTICON_LIST = (
 
 DELIMITER = '_'
 
+NUM_TOPICS = 10
+
 NEGATION_WORD = 'tidak'
 
 STOP_WORD = set("""
