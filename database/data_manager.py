@@ -9,7 +9,7 @@ TABLES = {'online_shop': (
     "  `id` int(11) NOT NULL AUTO_INCREMENT,"
     "  `topic_cluster` int(11) DEFAULT NULL,"
     "  `word` varchar(255) DEFAULT NULL,"
-    "  `score` decimal(65,10) DEFAULT NULL,"
+    "  `score` float DEFAULT NULL,"
     "  `merchant_name` varchar(255) DEFAULT NULL,"
     "  `year` int(11) DEFAULT NULL,"
     "  `month` int(11) DEFAULT NULL,"
@@ -90,7 +90,7 @@ class DataManager(object):
         data = {
             'topic_cluster': topic_cluster,
             'word': word,
-            'score': score,
+            'score': float(score),
             'merchant_name': merchant_name,
             'year': year,
             'month': month,

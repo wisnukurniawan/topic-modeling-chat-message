@@ -1,4 +1,3 @@
-
 class ChatMessage:
     name = ""
     content = ""
