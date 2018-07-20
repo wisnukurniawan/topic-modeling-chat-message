@@ -65,7 +65,7 @@ def job():
     """ Function to be scheduling. """
     merchant_name = ""
     current_date = datetime.now().date()
-    current_month = 5  # datetime.now().month
+    current_month = 12  # datetime.now().month
     current_year = 2017  # datetime.now().year
 
     # if str(current_date.day) == "1":
@@ -92,9 +92,9 @@ def job():
 
         # find highest coherence score
         lda_models_with_coherence_score = {}
-        for num_topic in range(NUM_TOPICS):
+        for index in range(NUM_TOPICS):
             lda_model = LdaMulticore(corpus_tf_idf,
-                                     num_topics=num_topic + 1,
+                                     num_topics=index + 1,
                                      id2word=dictionary,
                                      passes=2,
                                      workers=cpu_count())
@@ -109,27 +109,21 @@ def job():
 
         # running the best lda model based on highest coherence score
         lda_model = lda_models_with_coherence_score[max(lda_models_with_coherence_score)]
-        topic_terms = []
-        for topic in lda_model.print_topics(-1):
-            lda_model_topic_terms_dict = {}
-            for k, v in lda_model.get_topic_terms(topic[0]):
-                lda_model_topic_terms_dict[dictionary[k]] = v
-            topic_terms.append(lda_model_topic_terms_dict)
 
         # save into DB
-        for topic_pos, topic_term in enumerate(topic_terms):
-            for word, score in topic_term.items():
+        for cluster, topic_term in lda_model.show_topics(-1, num_words=20, formatted=False):
+            for topic in topic_term:
                 logger.info(
-                    f'Topic Cluster: {topic_pos + 1}, '
-                    f'Word: {word}, '
-                    f'Score: {score}, '
+                    f'Topic Cluster: {cluster + 1}, '
+                    f'Word: {topic[0]}, '
+                    f'Score: {topic[1]}, '
                     f'Merchant: {merchant_name}, '
                     f'Year: {current_year}, '
                     f'Month: {current_month}'
                 )
-                data_manager.insert_into_online_shop(topic_cluster=topic_pos + 1,
-                                                     word=word,
-                                                     score=score,
+                data_manager.insert_into_online_shop(topic_cluster=cluster + 1,
+                                                     word=topic[0],
+                                                     score=topic[1],
                                                      merchant_name=merchant_name,
                                                      year=current_year,
                                                      month=current_month)
