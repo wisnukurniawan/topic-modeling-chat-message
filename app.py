@@ -65,7 +65,7 @@ def job():
     """ Function to be scheduling. """
     merchant_name = ""
     current_date = datetime.now().date()
-    current_month = 4  # datetime.now().month
+    current_month = 5  # datetime.now().month
     current_year = 2017  # datetime.now().year
 
     # if str(current_date.day) == "1":
@@ -76,6 +76,8 @@ def job():
 
         # cleaning chat text
         results = preprocessing.cleaning(message_history_list)
+        for result in results:
+            logger.info(f'Preprocessing result: {result.content}')
 
         # build documents
         documents = [result.content.split() for result in results]
