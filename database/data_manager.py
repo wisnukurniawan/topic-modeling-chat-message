@@ -84,8 +84,8 @@ class DataManager(object):
         cursor = connector.cursor()
 
         add_data_query = ("INSERT INTO online_shop "
-                          "(topic_cluster, word, score, merchant_name, year, month)"
-                          "VALUES (%(topic_cluster)s, %(word)s, %(score)s, %(merchant_name)s, %(year)s, %(month)s)")
+                          "(id, topic_cluster, word, score, merchant_name, year, month)"
+                          "VALUES (%(id)s, %(topic_cluster)s, %(word)s, %(score)s, %(merchant_name)s, %(year)s, %(month)s)")
 
         data = {
             'id': str(uuid.uuid4()),

@@ -1,6 +1,9 @@
-# Datasource
+# Package
 resource/dataset/
 resource/example/
 
 # Idea files
 .idea/*
+
+# Cache
+__pycache__/
