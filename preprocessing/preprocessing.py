@@ -101,6 +101,8 @@ class Preprocessing(object):
         # normalize emoticon
         # content = PreprocessingUtilsV2.normalize_emoticon(content, self.keyword_processor_emoticon)
 
+        content = str(content)
+
         # normalize url
         content = PreprocessingUtils.normalize_url(content)
 

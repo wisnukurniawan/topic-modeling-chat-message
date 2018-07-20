@@ -42,6 +42,9 @@ email
 telepon
 butuh
 hubung
+chat
+informasi
+form
 """.split())
 
 EXC_STOP_WORD = set("""
