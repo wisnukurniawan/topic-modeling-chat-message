@@ -109,6 +109,8 @@ def job():
 
         # running the best lda model based on highest coherence score
         lda_model = lda_models_with_coherence_score[max(lda_models_with_coherence_score)]
+
+        # save into DB
         for cluster, topic_term in lda_model.show_topics(-1, num_words=20, formatted=False):
             for topic in topic_term:
                 logger.info(
