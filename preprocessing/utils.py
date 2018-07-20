@@ -71,23 +71,20 @@ class PreprocessingUtils:
             if rgx is not None:
                 path = urlparse(text_list[index]).path
                 path_list = path.split("/")
-                if path_list[-2].isnumeric():
-                    text_list[index] = path_list[-1].replace("-", "_")
+                if len(path_list) > 1:
+                    if path_list[-2].isnumeric():
+                        text_list[index] = path_list[-1].replace("-", "_")
 
         return ' '.join(text_list)
 
     @staticmethod
     def remove_url(text):
-        """
-        Remove url in text.
-        """
+        """ Remove url in text. """
         return re.sub(r'((http|https)://|www)[a-zA-Z0-9\-.]+\.[a-zA-Z]{2,3}(/\S*)?', '', text)
 
     @staticmethod
     def remove_unused_character(text):
-        """
-        Remove characters that are less than two character.
-        """
+        """ Remove characters that are less than two character. """
         text_list = text.split(' ')
         text_list_temp = []
 
@@ -99,9 +96,7 @@ class PreprocessingUtils:
 
     @staticmethod
     def remove_email(text):
-        """
-        Remove email in text.
-        """
+        """ Remove email in text. """
         return re.sub(
             r'[a-zA-Z0-9+._%\-]{1,256}@[a-zA-Z0-9][a-zA-Z0-9\-]{0,64}(\.[a-zA-Z0-9][a-zA-Z0-9\-]{0,25})+',
             '',
@@ -110,23 +105,17 @@ class PreprocessingUtils:
 
     @staticmethod
     def remove_punctuation(text):
-        """
-        Remove all punctuation in text.
-        """
+        """ Remove all punctuation in text. """
         return re.sub(r'[^\s\w]', ' ', text)
 
     @staticmethod
     def remove_digit_number(text):
-        """
-        Remove all digit number in text.
-        """
+        """ Remove all digit number in text. """
         return re.sub(r'[^a-z ]*([.0-9])*\d', '', text)
 
     @staticmethod
     def join_negation(text):
-        """
-        Join negation word with delimiter.
-        """
+        """  Join negation word with delimiter. """
         text_list = text.split(' ')
 
         for index in range(len(text_list)):
@@ -139,9 +128,7 @@ class PreprocessingUtils:
 
     @staticmethod
     def stemming_tokenize_and_remove_stop_word(text, nlp):
-        """
-        Stemming word, tokenize and then remove stop word.
-        """
+        """ This func doing three process. It was stemming word, tokenize and then remove stop word. """
         text_list = []
         text_list_temp = []
 
@@ -158,9 +145,7 @@ class PreprocessingUtils:
 
     @staticmethod
     def removing_extra_space(text):
-        """
-        Make extra space into one space.
-        """
+        """ Make extra space into one space. """
         text_list = text.split(' ')
         text_list_temp = []
 
