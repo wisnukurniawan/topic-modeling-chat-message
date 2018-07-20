@@ -71,7 +71,7 @@ class PreprocessingUtils:
             if rgx is not None:
                 path = urlparse(text_list[index]).path
                 path_list = path.split("/")
-                if len(path_list) > 2:
+                if len(path_list) > 1:
                     if path_list[-2].isnumeric():
                         text_list[index] = path_list[-1].replace("-", "_")
 
