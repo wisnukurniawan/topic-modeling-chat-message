@@ -65,7 +65,7 @@ def job():
     """ Function to be scheduling. """
     merchant_name = ""
     current_date = datetime.now().date()
-    current_month = 3  # datetime.now().month
+    current_month = 4  # datetime.now().month
     current_year = 2017  # datetime.now().year
 
     # if str(current_date.day) == "1":

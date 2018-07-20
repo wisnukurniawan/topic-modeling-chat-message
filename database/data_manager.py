@@ -1,5 +1,6 @@
-from os import environ
 import uuid
+from os import environ
+from datetime import date
 
 import mysql.connector
 from mysql.connector import errorcode
@@ -11,8 +12,7 @@ TABLES = {'online_shop': (
     "  `word` varchar(255) DEFAULT NULL,"
     "  `score` float DEFAULT NULL,"
     "  `merchant_name` varchar(255) DEFAULT NULL,"
-    "  `year` int(11) DEFAULT NULL,"
-    "  `month` int(11) DEFAULT NULL,"
+    "  `created_at` date DEFAULT NULL,"
     "  PRIMARY KEY (`id`)"
     ") ENGINE=InnoDB")}
 
@@ -84,8 +84,8 @@ class DataManager(object):
         cursor = connector.cursor()
 
         add_data_query = ("INSERT INTO online_shop "
-                          "(id, topic_cluster, word, score, merchant_name, year, month)"
-                          "VALUES (%(id)s, %(topic_cluster)s, %(word)s, %(score)s, %(merchant_name)s, %(year)s, %(month)s)")
+                          "(id, topic_cluster, word, score, merchant_name, created_at)"
+                          "VALUES (%(id)s, %(topic_cluster)s, %(word)s, %(score)s, %(merchant_name)s, %(created_at)s)")
 
         data = {
             'id': str(uuid.uuid4()),
@@ -93,8 +93,7 @@ class DataManager(object):
             'word': word,
             'score': float(score),
             'merchant_name': merchant_name,
-            'year': year,
-            'month': month,
+            'created_at': date(year, month, 1)
         }
         try:
             cursor.execute(add_data_query, data)
