@@ -41,7 +41,7 @@ def get_chat_message_history(month, year):
     :param year: year. example value 2018.
     :return: list of ChatMessage.
     """
-    chat_message_list_raw = pandas.read_csv('./resource/example/example.csv', sep=',')
+    chat_message_list_raw = pandas.read_csv(f'./resource/dataset/{month}_{year}.csv', sep=',')
     chat_message_list = list()
 
     if not chat_message_list_raw.empty:
@@ -65,8 +65,8 @@ def job():
     """ Function to be scheduling. """
     merchant_name = ""
     current_date = datetime.now().date()
-    current_month = datetime.now().month
-    current_year = datetime.now().year
+    current_month = 4  # datetime.now().month
+    current_year = 2017  # datetime.now().year
 
     # if str(current_date.day) == "1":
     message_history_list = get_chat_message_history(month=current_month, year=current_year)
