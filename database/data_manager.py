@@ -1,12 +1,12 @@
-from __future__ import print_function
-
 from os import environ
+import uuid
+
 import mysql.connector
 from mysql.connector import errorcode
 
 TABLES = {'online_shop': (
     "CREATE TABLE IF NOT EXISTS `online_shop` ("
-    "  `id` int(11) NOT NULL AUTO_INCREMENT,"
+    "  `id` varchar(36) NOT NULL,"
     "  `topic_cluster` int(11) DEFAULT NULL,"
     "  `word` varchar(255) DEFAULT NULL,"
     "  `score` float DEFAULT NULL,"
@@ -24,7 +24,7 @@ class DataManager(object):
 
     @staticmethod
     def connector():
-        """ Connect to MySQL database """
+        """ Connect to MySQL database. """
 
         # init db connection
         config = {
@@ -88,6 +88,7 @@ class DataManager(object):
                           "VALUES (%(topic_cluster)s, %(word)s, %(score)s, %(merchant_name)s, %(year)s, %(month)s)")
 
         data = {
+            'id': str(uuid.uuid4()),
             'topic_cluster': topic_cluster,
             'word': word,
             'score': float(score),

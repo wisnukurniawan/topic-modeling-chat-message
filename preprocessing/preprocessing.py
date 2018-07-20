@@ -25,9 +25,7 @@ class Preprocessing(object):
         self.__init_custom_stop_word()
 
     def __init_flash_text_corpus(self):
-        """
-        Init flash text corpus.
-        """
+        """ Init flash text corpus. """
         # build slang word corpus
         slang_words_raw = pandas.read_csv('resource/slang_word_list.csv', sep=',')
         for word in slang_words_raw.values:
@@ -40,9 +38,7 @@ class Preprocessing(object):
                 self.keyword_processor_emoticon.add_keyword(value, key)
 
     def __init_custom_stop_word(self):
-        """
-        Custom stop word for chat message content.
-        """
+        """ Custom stop word for chat message content. """
 
         for stop_word in constant.STOP_WORD:
             self.nlp.vocab[stop_word].is_stop = True
@@ -101,9 +97,7 @@ class Preprocessing(object):
         return chat_message_list
 
     def __preprocessing_flow(self, content):
-        """
-        Preprocessing flow.
-        """
+        """ Preprocessing flow. """
         # normalize emoticon
         content = PreprocessingUtilsV2.normalize_emoticon(content, self.keyword_processor_emoticon)
 
