@@ -14,6 +14,8 @@ from utils.constant import NUM_TOPICS
 from database.data_manager import DataManager
 from settings.env_config import set_default_config
 
+set_default_config()
+
 # init Logger
 logger = logging.getLogger("goliath")
 formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
@@ -27,6 +29,8 @@ preprocessing = Preprocessing(logger)
 
 # init DataManager
 data_manager = DataManager(logger)
+data_manager.create_database()
+data_manager.create_tables()
 
 
 def get_chat_message_history(month, year):
@@ -132,10 +136,6 @@ def job():
 if __name__ == '__main__':
     # schedule.every().day.at("02:00").do(job)
     # schedule.every(5).seconds.do(job)
-    set_default_config()
-    data_manager.create_database()
-    data_manager.create_tables()
-
     job()
 
     # while True:
