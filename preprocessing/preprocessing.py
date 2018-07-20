@@ -99,7 +99,7 @@ class Preprocessing(object):
     def __preprocessing_flow(self, content):
         """ Preprocessing flow. """
         # normalize emoticon
-        content = PreprocessingUtilsV2.normalize_emoticon(content, self.keyword_processor_emoticon)
+        # content = PreprocessingUtilsV2.normalize_emoticon(content, self.keyword_processor_emoticon)
 
         # normalize url
         content = PreprocessingUtils.normalize_url(content)

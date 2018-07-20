@@ -29,6 +29,19 @@ cakap
 nya
 kali
 biar
+siang
+malam
+pagi
+sore
+bantu
+bicara
+mohon
+nama
+nomor
+email
+telepon
+butuh
+hubung
 """.split())
 
 EXC_STOP_WORD = set("""

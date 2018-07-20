@@ -123,6 +123,8 @@ class PreprocessingUtils:
                 if index < len(text_list) - 1:
                     text_list[index] = text_list[index] + constant.DELIMITER + text_list[index + 1]
                     text_list[index + 1] = ''
+                else:
+                    text_list[index] = ''
 
         return ' '.join(text_list)
 
