@@ -65,7 +65,7 @@ def job():
     """ Function to be scheduling. """
     merchant_name = ""
     current_date = datetime.now().date()
-    current_month = 5  # datetime.now().month
+    current_month = 3  # datetime.now().month
     current_year = 2017  # datetime.now().year
 
     # if str(current_date.day) == "1":
@@ -92,9 +92,9 @@ def job():
 
         # find highest coherence score
         lda_models_with_coherence_score = {}
-        for num_topic in range(NUM_TOPICS):
+        for index in range(NUM_TOPICS):
             lda_model = LdaMulticore(corpus_tf_idf,
-                                     num_topics=num_topic + 1,
+                                     num_topics=index + 1,
                                      id2word=dictionary,
                                      passes=2,
                                      workers=cpu_count())
