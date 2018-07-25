@@ -20,4 +20,4 @@ COPY . ./
 
 # Default runtime configs
 EXPOSE 8080
-CMD ["python", "app.py"]
+CMD ["./wait-for-it.sh", "mysql:3306", "--", "python", "app.py"]
