@@ -45,6 +45,7 @@ hubung
 chat
 informasi
 form
+hallo
 """.split())
 
 EXC_STOP_WORD = set("""
