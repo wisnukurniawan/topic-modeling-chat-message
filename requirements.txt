@@ -1,5 +1,5 @@
-mysql-connector-python
-schedule
+mysql-connector-python=8.0.11
+schedule==0.5.0
 flashtext==2.7
 spacy==2.0.11
 gensim==3.5.0
