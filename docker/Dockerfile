@@ -7,7 +7,7 @@ WORKDIR /app
 COPY requirements.txt ./
 
 # install dependecies
-RUN pip install -r ./requirements.txt --upgrade
+RUN pip install -r ./requirements.txt
 
 # build app source code
 COPY . ./
