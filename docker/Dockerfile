@@ -8,7 +8,7 @@ WORKDIR /app
 COPY requirements.txt ./
 
 # install dependecies
-RUN apk add --update bash musl-dev build-base gcc libffi-dev make \
+RUN apk add --update bash musl-dev build-base gcc libffi-dev make git \
     # install dependencies
     && pip install -r ./requirements.txt \
     # clean pip cache
