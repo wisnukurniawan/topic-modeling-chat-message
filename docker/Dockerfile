@@ -1,6 +1,7 @@
-FROM python:3.6-slim
+FROM python:3.6-alpine
 
 # app workdir
+RUN mkdir /app
 WORKDIR /app
 
 # copy app dependencies
@@ -16,7 +17,7 @@ RUN apk add --update bash musl-dev build-base gcc libffi-dev make \
     && rm -rf /var/cache/apk/*
 
 # build app source code
-COPY . ./
+COPY . /app
 
 # Default runtime configs
 EXPOSE 8080
