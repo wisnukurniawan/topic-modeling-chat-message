@@ -1,0 +1,21 @@
+version: '2'
+
+services:
+
+  app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    links:
+      - mysql:mysql
+
+  mysql:
+    image: mysql:5.7
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    environment:
+      MYSQL_DATABASE: bi_online_shop
+      MYSQL_USER: goliath
+      MYSQL_PASSWORD: goliath
