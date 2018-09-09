@@ -73,7 +73,7 @@ class PreprocessingUtils:
                 path_list = path.split("/")
                 if len(path_list) > 1:
                     if path_list[-2].isnumeric():
-                        text_list[index] = path_list[-1].replace("-", "_")
+                        text_list[index] = path_list[-1].replace("-", constant.DELIMITER)
 
         return ' '.join(text_list)
 
@@ -129,14 +129,18 @@ class PreprocessingUtils:
         return ' '.join(text_list)
 
     @staticmethod
-    def stemming_tokenize_and_remove_stop_word(text, nlp):
+    def stemming_tokenize_and_remove_stop_word(text, nlp, stemmer):
         """ This func doing three process. It was stemming word, tokenize and then remove stop word. """
         text_list = []
         text_list_temp = []
 
         # stemming
         for token in nlp.tokenizer(text):
-            text_list.append(token.lemma_)
+            token = str(token)
+            if constant.DELIMITER not in token:
+                text_list.append(stemmer.stem(token))
+            else:
+                text_list.append(token)
 
         # remove stop words
         for word in text_list:

@@ -4,6 +4,7 @@ from multiprocessing import cpu_count
 import pandas
 from flashtext.keyword import KeywordProcessor
 from spacy.lang.id import Indonesian
+from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
 from preprocessing.utils import PreprocessingUtils, PreprocessingUtilsV2
 from utils import constant
@@ -18,6 +19,9 @@ class Preprocessing(object):
         self.keyword_processor_slang_word = KeywordProcessor()
         self.keyword_processor_emoticon = KeywordProcessor()
 
+        # init stemmer
+        self.stemmer = StemmerFactory().create_stemmer()
+
         # init logger
         self.logger = logger
 
@@ -27,7 +31,7 @@ class Preprocessing(object):
     def __init_flash_text_corpus(self):
         """ Init flash text corpus. """
         # build slang word corpus
-        slang_words_raw = pandas.read_csv('resource/slang_word_list.csv', sep=',')
+        slang_words_raw = pandas.read_csv('resource/slang_word_list.csv', sep=',', header=None)
         for word in slang_words_raw.values:
             self.keyword_processor_slang_word.add_keyword(word[0], word[1])
 
@@ -125,7 +129,7 @@ class Preprocessing(object):
         content = PreprocessingUtilsV2.normalize_slang_word(content, self.keyword_processor_slang_word)
 
         # stemming, tokenize, remove stop word
-        content = PreprocessingUtils.stemming_tokenize_and_remove_stop_word(content, self.nlp)
+        content = PreprocessingUtils.stemming_tokenize_and_remove_stop_word(content, self.nlp, self.stemmer)
 
         # remove unused character
         content = PreprocessingUtils.remove_unused_character(content)
