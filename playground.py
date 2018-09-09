@@ -55,7 +55,7 @@ if __name__ == '__main__':
     #         coherence_model_lda = CoherenceModel(model=lda_model,
     #                                              texts=documents,
     #                                              corpus=bow_corpus,
-    #                                              coherence='c_v')
+    #                                               coherence='c_v')
     #         coherence_score = coherence_model_lda.get_coherence()
     #         lda_models_with_coherence_score[coherence_score] = lda_model
     #         writer.writerow([coherence_score, index])
