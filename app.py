@@ -68,6 +68,7 @@ def job():
     current_date = datetime.now().date()
     current_month = 12  # datetime.now().month
     current_year = 2018  # datetime.now().year
+    worker = cpu_count() - 1
 
     # if str(current_date.day) == "1":
     message_history_list = get_chat_message_history(month=current_month, year=current_year)
@@ -77,12 +78,12 @@ def job():
 
         # cleaning chat text
         results = preprocessing.cleaning(message_history_list)
-        for result in results:
-            logger.info(f'Preprocessing result: {result.content}')
+        logger.info(f'Preprocessing result size: {len(results)}')
 
         # build documents
         documents = [result.content.split() for result in results]
         dictionary = Dictionary(documents)
+        logger.info(f'Preprocessing unique tokens: {len(dictionary)}')
 
         # build bag of words
         bow_corpus = [dictionary.doc2bow(document) for document in documents]
@@ -93,16 +94,15 @@ def job():
 
         # find highest coherence score
         lda_models_with_coherence_score = {}
-        for index in range(NUM_TOPICS):
-            lda_model = LdaMulticore(corpus_tf_idf,
-                                     num_topics=index + 1,
+        for index in range(2, NUM_TOPICS + 1):
+            lda_model = LdaMulticore(corpus=corpus_tf_idf,
+                                     num_topics=index,
                                      id2word=dictionary,
-                                     passes=2,
-                                     workers=cpu_count())
+                                     workers=worker)
 
             coherence_model_lda = CoherenceModel(model=lda_model,
                                                  texts=documents,
-                                                 corpus=bow_corpus,
+                                                 corpus=corpus_tf_idf,
                                                  coherence='c_v')
             coherence_score = coherence_model_lda.get_coherence()
             lda_models_with_coherence_score[coherence_score] = lda_model

@@ -21,6 +21,7 @@ import warnings
 import csv
 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
+warnings.filterwarnings("ignore", category=FutureWarning)
 
 set_default_config()
 
@@ -34,6 +35,7 @@ logger.addHandler(logfile_handler)
 
 # init our Preprocessing
 preprocessing = Preprocessing(logger)
+
 
 # init DataManager
 # data_manager = DataManager(logger)
@@ -50,7 +52,7 @@ def get_chat_message_history(month, year):
     :return: list of ChatMessage.
     """
     # chat_message_list_raw = pandas.read_csv(f'./resource/dataset/{month}_{year}.csv', sep=',')
-    chat_message_list_raw = pandas.read_csv(f'./resource/example/example.csv', sep=',')
+    chat_message_list_raw = pandas.read_csv(f'./resource/example/example_s.csv', sep=',')
     chat_message_list = list()
 
     if not chat_message_list_raw.empty:
@@ -76,6 +78,7 @@ def job():
     current_date = datetime.now().date()
     current_month = 12  # datetime.now().month
     current_year = 2019  # datetime.now().year
+    worker = cpu_count() - 1
 
     # if str(current_date.day) == "1":
     message_history_list = get_chat_message_history(month=current_month, year=current_year)
@@ -85,12 +88,10 @@ def job():
 
         # cleaning chat text
         results = preprocessing.cleaning(message_history_list)
-        for result in results:
-            logger.info(f'Preprocessing result: {result.content}')
+        logger.info(f'Preprocessing result size: {len(results)}')
 
         # build documents
         documents = [result.content.split() for result in results]
-        logger.info(f'Preprocessing documents: {documents}')  # lapor kirim -> [['lapor', 'kirim'], ...
         dictionary = Dictionary(documents)
         logger.info(f'Preprocessing unique tokens: {len(dictionary)}')
 
@@ -111,16 +112,17 @@ def job():
         lda_models_with_coherence_score = {}
         coherence_scores = []
         start_time = time.time()
-        for index in range(NUM_TOPICS):
-            lda_model = LdaMulticore(corpus_tf_idf,
-                                     num_topics=index + 1,
+        for index in range(2, NUM_TOPICS + 1):
+            lda_model = LdaMulticore(corpus=corpus_tf_idf,
+                                     num_topics=index,
                                      id2word=dictionary,
-                                     passes=2,
-                                     workers=cpu_count())
+                                     alpha='asymmetric',
+                                     eta='symmetric',
+                                     workers=worker)
 
             coherence_model_lda = CoherenceModel(model=lda_model,
                                                  texts=documents,
-                                                 corpus=bow_corpus,
+                                                 corpus=corpus_tf_idf,
                                                  coherence='c_v')
             coherence_score = coherence_model_lda.get_coherence()
             lda_models_with_coherence_score[coherence_score] = lda_model
@@ -133,9 +135,9 @@ def job():
         with open(f'{current_month}-{current_year}-executions_info.csv', "w", newline="") as f:
             writer = csv.writer(f)
             writer.writerow(["cpu_count", "num_tokens", "time", "num_topics"])
-            writer.writerow([cpu_count(), len(dictionary), time.time() - start_time, NUM_TOPICS])
+            writer.writerow([worker, len(dictionary), time.time() - start_time, NUM_TOPICS])
 
-        rangex = range(1, 11)
+        rangex = range(2, NUM_TOPICS + 1)
         plt.plot(rangex, coherence_scores)
         plt.xlabel("Num Topics")
         plt.ylabel("Coherence score")
