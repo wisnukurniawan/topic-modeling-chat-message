@@ -7,3 +7,7 @@ resource/example/
 
 # Cache
 __pycache__/
+
+# Playground
+playground.py
+playground2.py
