@@ -94,7 +94,7 @@ def job():
 
         # find highest coherence score
         lda_models_with_coherence_score = {}
-        for index in range(2, NUM_TOPICS + 1):
+        for index in range(1, NUM_TOPICS + 1):
             lda_model = LdaMulticore(corpus=corpus_tf_idf,
                                      num_topics=index,
                                      id2word=dictionary,
