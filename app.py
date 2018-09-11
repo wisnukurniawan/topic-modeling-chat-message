@@ -45,7 +45,7 @@ def job():
 
         # cleaning chat text
         results = preprocessing.cleaning(message_history_list)
-        logger.info(f'Preprocessing result size: {len(results)}')
+        logger.info(f'Preprocessing result {len(results)} items')
 
         # build documents
         documents = [result.content.split() for result in results]
