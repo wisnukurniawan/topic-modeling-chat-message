@@ -33,7 +33,7 @@ class Repository(object):
         :return: list of ChatMessage.
         """
         # chat_message_list_raw = pandas.read_csv(f'./resource/dataset/{month}_{year}.csv', sep=',')
-        chat_message_list_raw = pandas.read_csv(f'./resource/example/example.csv', sep=',')
+        chat_message_list_raw = pandas.read_csv(f'./resource/dataset/11_2017.csv', sep=',')
         chat_message_list = list()
 
         if not chat_message_list_raw.empty:

@@ -34,7 +34,7 @@ def job():
     merchant_name = ""
     current_date = datetime.now().date()
     current_month = 12  # datetime.now().month
-    current_year = 2018  # datetime.now().year
+    current_year = 2019  # datetime.now().year
     worker = cpu_count() - 1
 
     # if str(current_date.day) == "1":

@@ -55,7 +55,7 @@ class Preprocessing(object):
         Pre-processing the content from ChatMessage.
 
         :param chat_message_list: dirty content from list of ChatMessage.
-        :return: observable list of ChatMessage.
+        :return: list of ChatMessage.
         """
         chat_message_list_temp = []
 
@@ -81,7 +81,7 @@ class Preprocessing(object):
         Pre-processing the content from ChatMessage with multi threading from spaCy.
 
         :param chat_message_list: dirty content from list of ChatMessage.
-        :return: observable list of ChatMessage.
+        :return: list of ChatMessage.
         """
 
         if chat_message_list:
