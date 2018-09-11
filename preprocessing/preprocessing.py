@@ -1,17 +1,20 @@
 import time
+import logging
 from multiprocessing import cpu_count
 
-import pandas
 from flashtext.keyword import KeywordProcessor
 from spacy.lang.id import Indonesian
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
 from preprocessing.utils import PreprocessingUtils, PreprocessingUtilsV2
 from utils import constant
+from repository.repository import Repository
+
+logger = logging.getLogger("goliath")
 
 
 class Preprocessing(object):
-    def __init__(self, logger):
+    def __init__(self):
         # init NLP
         self.nlp = Indonesian()
 
@@ -22,16 +25,13 @@ class Preprocessing(object):
         # init stemmer
         self.stemmer = StemmerFactory().create_stemmer()
 
-        # init logger
-        self.logger = logger
-
         self.__init_flash_text_corpus()
         self.__init_custom_stop_word()
 
     def __init_flash_text_corpus(self):
         """ Init flash text corpus. """
         # build slang word corpus
-        slang_words_raw = pandas.read_csv('resource/slang_word_list.csv', sep=',', header=None)
+        slang_words_raw = Repository.get_slang_word()
         for word in slang_words_raw.values:
             self.keyword_processor_slang_word.add_keyword(word[0], word[1])
 
@@ -60,7 +60,7 @@ class Preprocessing(object):
         chat_message_list_temp = []
 
         if chat_message_list:
-            self.logger.info('Pre-processing started...')
+            logger.info('Pre-processing started...')
             start_time = time.time()
 
             for chat_message in chat_message_list:
@@ -69,9 +69,9 @@ class Preprocessing(object):
                 if content.strip():
                     chat_message_list_temp.append(chat_message)
 
-            self.logger.info(f'Pre-processing finished. {time.time() - start_time} seconds')
+            logger.info(f'Pre-processing finished. {time.time() - start_time} seconds')
         else:
-            self.logger.info('No chat message yet.')
+            logger.info('No chat message yet.')
 
         return chat_message_list_temp
 
@@ -85,7 +85,7 @@ class Preprocessing(object):
         """
 
         if chat_message_list:
-            self.logger.info('Pre-processing started...')
+            logger.info('Pre-processing started...')
             start_time = time.time()
             index = 0
 
@@ -94,9 +94,9 @@ class Preprocessing(object):
                 chat_message_list[index].content = self.__preprocessing_flow(content.text)
                 index = index + 1
 
-            self.logger.info(f'Pre-processing finished. {time.time() - start_time} seconds')
+            logger.info(f'Pre-processing finished. {time.time() - start_time} seconds')
         else:
-            self.logger.info('No chat message yet.')
+            logger.info('No chat message yet.')
 
         return chat_message_list
 
