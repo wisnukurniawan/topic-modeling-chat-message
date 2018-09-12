@@ -1,9 +1,8 @@
 import re
 from urllib.parse import urlparse
 
-import pandas
-
 from utils import constant
+from repository.repository import Repository
 
 
 class PreprocessingUtils:
@@ -44,7 +43,7 @@ class PreprocessingUtils:
         :return: (str) text has been normalize.
         """
         text_list = text.split(' ')
-        slang_words_raw = pandas.read_csv('resource/slang_word_list.csv', sep=',')
+        slang_words_raw = Repository.get_slang_word()
         slang_word_dict = {}
 
         for item in slang_words_raw.values:

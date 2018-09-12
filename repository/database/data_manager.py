@@ -1,9 +1,12 @@
 import uuid
 from os import environ
 from datetime import date
+import logging
 
 import mysql.connector
 from mysql.connector import errorcode
+
+logger = logging.getLogger("goliath")
 
 TABLES = {'online_shop': (
     "CREATE TABLE IF NOT EXISTS `online_shop` ("
@@ -18,9 +21,6 @@ TABLES = {'online_shop': (
 
 
 class DataManager(object):
-    def __init__(self, logger):
-        # init logger
-        self.logger = logger
 
     @staticmethod
     def connector():
@@ -49,12 +49,12 @@ class DataManager(object):
                 try:
                     cursor.execute("CREATE DATABASE {} DEFAULT CHARACTER SET 'utf8'".format(environ.get('MYSQL_DB')))
                 except mysql.connector.Error as err:
-                    self.logger.info(f"Failed creating database: {err}")
+                    logger.info(f"Failed creating database: {err}")
                     exit(1)
 
                     connector.database = environ.get('MYSQL_DB')
             else:
-                self.logger.info(err)
+                logger.info(err)
                 exit(1)
 
         cursor.close()
@@ -66,15 +66,15 @@ class DataManager(object):
 
         for name, ddl in TABLES.items():
             try:
-                self.logger.info(f"Creating table: {name}")
+                logger.info(f"Creating table: {name}")
                 cursor.execute(ddl)
             except mysql.connector.Error as err:
                 if err.errno == errorcode.ER_TABLE_EXISTS_ERROR:
-                    self.logger.info("Already exists.")
+                    logger.info("Already exists.")
                 else:
-                    self.logger.info(err.msg)
+                    logger.info(err.msg)
             else:
-                self.logger.info("OK")
+                logger.info("OK")
 
         cursor.close()
         connector.close()
