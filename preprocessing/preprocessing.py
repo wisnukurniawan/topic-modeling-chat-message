@@ -5,6 +5,8 @@ from multiprocessing import cpu_count
 from flashtext.keyword import KeywordProcessor
 from spacy.lang.id import Indonesian
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+from gensim.models import Phrases
+from gensim.models.phrases import Phraser
 
 from preprocessing.utils import PreprocessingUtils, PreprocessingUtilsV2
 from utils import constant
@@ -146,3 +148,15 @@ class Preprocessing(object):
         # TODO add another pre-processing if needed
 
         return content
+
+    @staticmethod
+    def identify_phrase(documents):
+        """ documents : iterable of iterable of str """
+        documents_temp = []
+        bigram = Phraser(Phrases(documents, min_count=10))
+
+        for i in range(len(documents)):
+            for token in bigram[documents[i]]:
+                if '_' in token:
+                    documents_temp.append(token)
+        return documents_temp
