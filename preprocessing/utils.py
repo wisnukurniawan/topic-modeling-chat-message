@@ -149,7 +149,7 @@ class PreprocessingUtils:
         return ' '.join(text_list_temp)
 
     @staticmethod
-    def removing_extra_space(text):
+    def remove_extra_space(text):
         """ Make extra space into one space. """
         text_list = text.split(' ')
         text_list_temp = []
@@ -159,6 +159,16 @@ class PreprocessingUtils:
                 text_list_temp.append(word.strip())
 
         return ' '.join(text_list_temp)
+
+    @staticmethod
+    def remove_repeated_character(text):
+        """
+        Remove repeated character more than two in text
+        Why two not one character?
+        Because some Indonesian word, there is like 'tunggu', 'saat', etc. We don't want remove it.
+        """
+        return re.sub(r'(.)\1{2,}', r'\1', text)
+
 
 
 class PreprocessingUtilsV2:

@@ -125,6 +125,9 @@ class Preprocessing(object):
         # remove punctuation
         content = PreprocessingUtils.remove_punctuation(content)
 
+        # remove repeated character
+        content = PreprocessingUtils.remove_repeated_character(content)
+
         # normalize slang word
         content = PreprocessingUtilsV2.normalize_slang_word(content, self.keyword_processor_slang_word)
 
@@ -138,7 +141,7 @@ class Preprocessing(object):
         content = PreprocessingUtils.join_negation(content)
 
         # remove extra space between word
-        content = PreprocessingUtils.removing_extra_space(content)
+        content = PreprocessingUtils.remove_extra_space(content)
 
         # TODO add another pre-processing if needed
 
