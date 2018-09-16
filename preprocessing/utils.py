@@ -170,7 +170,6 @@ class PreprocessingUtils:
         return re.sub(r'(.)\1{2,}', r'\1', text)
 
 
-
 class PreprocessingUtilsV2:
     @staticmethod
     def normalize_emoticon(text, keyword_processor):
