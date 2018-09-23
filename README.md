@@ -3,7 +3,7 @@ Automation topic modeling for chat message using gensim LDA
 
 Status: under development
 
-##Docker cheat set
+## Docker cheat set
 exec `docker ps -a` for see list our docker image
 
 1. start your docker application
