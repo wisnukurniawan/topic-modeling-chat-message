@@ -2,6 +2,7 @@ import logging
 import sys
 import schedule
 import time
+import calendar
 from datetime import datetime
 from multiprocessing import cpu_count
 
@@ -32,13 +33,12 @@ repository = Repository()
 
 def job():
     """ Function to be scheduling. """
-    merchant_name = ""
-    current_date = datetime.now().date()
     current_month = 12  # datetime.now().month
     current_year = 2019  # datetime.now().year
+
     worker = cpu_count() - 1
 
-    # if str(current_date.day) == "1":
+    # if is_last_month(current_year, current_month):
     message_history_list = Repository.get_chat_message_history(month=current_month, year=current_year)
 
     if message_history_list:
@@ -103,12 +103,19 @@ def test():
     logger.info("HELLO WORLD!")
 
 
+def is_last_month(current_year, current_month):
+    calendar_range = calendar.monthrange(current_year, current_month)
+
+    last_date_in_month = calendar_range[1]
+    current_date = datetime.now().date().day
+    return last_date_in_month == current_date
+
+
 if __name__ == '__main__':
     # schedule.every().day.at("02:00").do(test)
-    schedule.every(5).seconds.do(test)
-    # job()
-    # test()
+    # schedule.every(5).seconds.do(test)
+    job()
 
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    # while True:
+    #     schedule.run_pending()
+    #     time.sleep(1)
