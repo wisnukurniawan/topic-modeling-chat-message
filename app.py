@@ -1,6 +1,7 @@
 import logging
 import sys
 import schedule
+import time
 from datetime import datetime
 from multiprocessing import cpu_count
 
@@ -98,11 +99,16 @@ def job():
                 #                                    month=current_month)
 
 
-if __name__ == '__main__':
-    # schedule.every().day.at("02:00").do(job)
-    # schedule.every(5).seconds.do(job)
-    job()
+def test():
+    logger.info("HELLO WORLD!")
 
-    # while True:
-    #     schedule.run_pending()
-    #     time.sleep(1)
+
+if __name__ == '__main__':
+    # schedule.every().day.at("02:00").do(test)
+    schedule.every(5).seconds.do(test)
+    # job()
+    # test()
+
+    while True:
+        schedule.run_pending()
+        time.sleep(1)
