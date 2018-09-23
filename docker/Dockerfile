@@ -4,7 +4,7 @@ FROM python:3.6
 WORKDIR /app
 
 # copy app dependencies
-COPY requirements.txt docker/*.sh ./
+COPY ../requirements.txt ./
 
 # install dependecies
 RUN apt-get update
