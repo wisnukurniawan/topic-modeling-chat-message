@@ -33,8 +33,8 @@ repository = Repository()
 
 def job():
     """ Function to be scheduling. """
-    current_month = 12  # datetime.now().month
-    current_year = 2019  # datetime.now().year
+    current_month = 3  # datetime.now().month
+    current_year = 2017  # datetime.now().year
 
     worker = cpu_count() - 1
 
@@ -50,7 +50,7 @@ def job():
 
         # build documents
         documents = [result.content.split() for result in results]
-        documents = documents + Preprocessing.identify_phrase(documents)
+        documents = Preprocessing.identify_phrase(documents)
         dictionary = Dictionary(documents)
         logger.info(f'Preprocessing unique tokens: {len(dictionary)}')
 
@@ -91,15 +91,15 @@ def job():
                     f'Year: {current_year}, '
                     f'Month: {current_month}'
                 )
-                # repository.insert_into_online_shop(topic_cluster=cluster + 1,
-                #                                    word=topic[0],
-                #                                    score=topic[1],
-                #                                    merchant_name=merchant_name,
-                #                                    year=current_year,
-                #                                    month=current_month)
+                repository.insert_into_online_shop(topic_cluster=cluster + 1,
+                                                   word=topic[0],
+                                                   score=topic[1],
+                                                   merchant_name=merchant_name,
+                                                   year=current_year,
+                                                   month=current_month)
 
 
-def test():
+def func_test():
     logger.info("HELLO WORLD!")
 
 
@@ -112,8 +112,8 @@ def is_last_month(current_year, current_month):
 
 
 if __name__ == '__main__':
-    # schedule.every().day.at("02:00").do(test)
-    # schedule.every(5).seconds.do(test)
+    # schedule.every().day.at("02:00").do(job)
+    # schedule.every(5).seconds.do(job)
     job()
 
     # while True:
