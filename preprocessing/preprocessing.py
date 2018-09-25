@@ -152,11 +152,10 @@ class Preprocessing(object):
     @staticmethod
     def identify_phrase(documents):
         """ documents : iterable of iterable of str """
-        documents_temp = []
         bigram = Phraser(Phrases(documents, min_count=10, delimiter=b'_'))
 
         for i in range(len(documents)):
             for token in bigram[documents[i]]:
                 if '_' in token:
-                    documents_temp.append(token)
-        return documents_temp
+                    documents[i].append(token)
+        return documents

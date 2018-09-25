@@ -7,21 +7,22 @@ from repository.database.data_manager import DataManager
 
 logger = logging.getLogger("goliath")
 
+
 class Repository(object):
 
-    # def __init__(self):
-    #     # init DataManager
-    #     self.data_manager = DataManager()
-    #     self.data_manager.create_database()
-    #     self.data_manager.create_tables()
-    #
-    # def insert_into_online_shop(self, topic_cluster, word, score, merchant_name, year, month):
-    #     self.data_manager.insert_into_online_shop(topic_cluster=topic_cluster,
-    #                                               word=word,
-    #                                               score=score,
-    #                                               merchant_name=merchant_name,
-    #                                               year=year,
-    #                                               month=month)
+    def __init__(self):
+        # init DataManager
+        self.data_manager = DataManager()
+        self.data_manager.create_database()
+        self.data_manager.create_tables()
+
+    def insert_into_online_shop(self, topic_cluster, word, score, merchant_name, year, month):
+        self.data_manager.insert_into_online_shop(topic_cluster=topic_cluster,
+                                                  word=word,
+                                                  score=score,
+                                                  merchant_name=merchant_name,
+                                                  year=year,
+                                                  month=month)
 
     @staticmethod
     def get_chat_message_history(month, year):
@@ -32,8 +33,8 @@ class Repository(object):
         :param year: year. example value 2018.
         :return: list of ChatMessage.
         """
-        # chat_message_list_raw = pandas.read_csv(f'./resource/dataset/{month}_{year}.csv', sep=',')
-        chat_message_list_raw = pandas.read_csv(f'./resource/example/example_s.csv', sep=',')
+        chat_message_list_raw = pandas.read_csv(f'./resource/dataset/{month}_{year}.csv', sep=',')
+        # chat_message_list_raw = pandas.read_csv(f'./resource/example/example_s.csv', sep=',')
         chat_message_list = list()
 
         if not chat_message_list_raw.empty:
