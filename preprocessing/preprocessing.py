@@ -11,6 +11,7 @@ from gensim.models.phrases import Phraser
 from preprocessing.utils import PreprocessingUtils, PreprocessingUtilsV2
 from utils import constant
 from repository.repository import Repository
+import collections
 
 logger = logging.getLogger("goliath")
 
@@ -65,7 +66,9 @@ class Preprocessing(object):
             logger.info('Pre-processing started...')
             start_time = time.time()
 
-            for chat_message in chat_message_list:
+            chat_message_list_clean = self.remove_repeated_message_from_agent(chat_message_list)
+
+            for chat_message in chat_message_list_clean:
                 content = self.__preprocessing_flow(chat_message.content)
                 chat_message.content = content
                 if content.strip():
@@ -159,3 +162,22 @@ class Preprocessing(object):
                 if '_' in token:
                     documents[i].append(token)
         return documents
+
+    @staticmethod
+    def remove_repeated_message_from_agent(message_history_list):
+        message_template_list = []
+        counter = collections.Counter()
+
+        for chat_message in message_history_list:
+            if chat_message.sender_role == constant.SENDER_ROLE_AGENT:
+                counter[chat_message.content] += 1
+
+        for key, value in counter.items():
+            if value > constant.MESSAGE_TEMPLATE_MIN_COUNT:
+                message_template_list.append(key)
+
+        for chat_message in message_history_list:
+            if chat_message.content in message_template_list:
+                chat_message.content = ""
+
+        return message_history_list
