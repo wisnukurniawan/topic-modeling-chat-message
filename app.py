@@ -4,10 +4,9 @@ import schedule
 import time
 import calendar
 from datetime import datetime
-from multiprocessing import cpu_count
 
 from gensim.corpora import Dictionary
-from gensim.models import TfidfModel, LdaMulticore, CoherenceModel
+from gensim.models import TfidfModel, LdaModel, CoherenceModel
 
 from preprocessing.preprocessing import Preprocessing
 from utils.constant import NUM_TOPICS
@@ -36,8 +35,6 @@ def job():
     current_month = 3  # datetime.now().month
     current_year = 2017  # datetime.now().year
 
-    worker = cpu_count() - 1
-
     # if is_last_month(current_year, current_month):
     message_history_list = Repository.get_chat_message_history(month=current_month, year=current_year)
 
@@ -64,10 +61,9 @@ def job():
         # find highest coherence score
         lda_models_with_coherence_score = {}
         for index in range(1, NUM_TOPICS + 1):
-            lda_model = LdaMulticore(corpus=corpus_tf_idf,
-                                     num_topics=index,
-                                     id2word=dictionary,
-                                     workers=worker)
+            lda_model = LdaModel(corpus=corpus_tf_idf,
+                                 num_topics=index,
+                                 id2word=dictionary)
 
             coherence_model_lda = CoherenceModel(model=lda_model,
                                                  texts=documents,
