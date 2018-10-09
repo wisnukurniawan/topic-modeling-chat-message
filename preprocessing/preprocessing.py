@@ -65,7 +65,7 @@ class Preprocessing(object):
         if chat_message_list:
             logger.info('Pre-processing started...')
             start_time = time.time()
-            
+            chat_message_list = self.remove_repeated_message_from_agent(chat_message_list)
             for chat_message in chat_message_list:
                 content = self.__preprocessing_flow(chat_message.content)
                 chat_message.content = content
