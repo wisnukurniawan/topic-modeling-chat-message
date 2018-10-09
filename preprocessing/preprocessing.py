@@ -165,6 +165,7 @@ class Preprocessing(object):
 
     @staticmethod
     def remove_repeated_message_from_agent(message_history_list):
+        """ documents : removed repeated chat message if repeat more than constant.MESSAGE_TEMPLATE_MIN_COUNT"""
         message_template_list = []
         counter = collections.Counter()
 
