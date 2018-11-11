@@ -10,19 +10,19 @@ logger = logging.getLogger("goliath")
 
 class Repository(object):
 
-    # def __init__(self):
-    #     # init DataManager
-    #     self.data_manager = DataManager()
-    #     self.data_manager.create_database()
-    #     self.data_manager.create_tables()
-    #
-    # def insert_into_online_shop(self, topic_cluster, word, score, merchant_name, year, month):
-    #     self.data_manager.insert_into_online_shop(topic_cluster=topic_cluster,
-    #                                               word=word,
-    #                                               score=score,
-    #                                               merchant_name=merchant_name,
-    #                                               year=year,
-    #                                               month=month)
+    def __init__(self):
+        # init DataManager
+        self.data_manager = DataManager()
+        self.data_manager.create_database()
+        self.data_manager.create_tables()
+
+    def insert_into_online_shop(self, topic_cluster, word, score, merchant_name, year, month):
+        self.data_manager.insert_into_online_shop(topic_cluster=topic_cluster,
+                                                  word=word,
+                                                  score=score,
+                                                  merchant_name=merchant_name,
+                                                  year=year,
+                                                  month=month)
 
     @staticmethod
     def get_chat_message_history(month, year):
