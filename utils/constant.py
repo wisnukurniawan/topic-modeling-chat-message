@@ -50,6 +50,11 @@ chat
 informasi
 form
 hallo
+ukur
+second
+kece
+tinggal
+kakak
 """.split())
 
 EXC_STOP_WORD = set("""
