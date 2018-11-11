@@ -33,8 +33,8 @@ class Repository(object):
         :param year: year. example value 2018.
         :return: list of ChatMessage.
         """
-        chat_message_list_raw = pandas.read_csv(f'./resource/dataset/{month}_{year}.csv', sep=',')
-        # chat_message_list_raw = pandas.read_csv(f'./resource/example/example_s.csv', sep=',')
+        # chat_message_list_raw = pandas.read_csv(f'./resource/dataset/{month}_{year}.csv', sep=',')
+        chat_message_list_raw = pandas.read_csv(f'./resource/example/example_s.csv', sep=',')
         chat_message_list = list()
 
         if not chat_message_list_raw.empty:
@@ -56,3 +56,7 @@ class Repository(object):
     @staticmethod
     def get_slang_word():
         return pandas.read_csv('resource/slang_word_list.csv', sep=',', header=None)
+
+    @staticmethod
+    def get_meaning_text():
+        return pandas.read_csv('resource/meaning_text_dict.csv', sep=',', header=None)
