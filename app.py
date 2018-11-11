@@ -48,7 +48,6 @@ def job():
         # build documents
         documents = [result.content.split() for result in results]
         documents = Preprocessing.identify_phrase(documents)
-        documents = preprocessing.remove_stop_word(documents)
         dictionary = Dictionary(documents)
         logger.info(f'Preprocessing unique tokens: {len(dictionary)}')
 

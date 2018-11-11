@@ -73,7 +73,9 @@ class Preprocessing(object):
             start_time = time.time()
             chat_message_list = self.remove_repeated_message_from_agent(chat_message_list)
             for chat_message in chat_message_list:
+                logger.info(f'BEFORE -> {chat_message.content}')
                 content = self.__preprocessing_flow(chat_message.content)
+                logger.info(f'AFTER -> {content}')
                 chat_message.content = content
                 if content.strip():
                     chat_message_list_temp.append(chat_message)
@@ -177,7 +179,11 @@ class Preprocessing(object):
         # remove extra space between word
         content = PreprocessingUtils.remove_extra_space(content)
 
+        # normalize word
         content = PreprocessingUtilsV2.normalize_meaning_word(content, self.keyword_processor_meaning_text)
+
+        # remove stop word
+        content = PreprocessingUtils.remove_stop_word(content, self.nlp)
 
         # TODO add another pre-processing if needed
 
@@ -197,9 +203,6 @@ class Preprocessing(object):
                 if '_' in token:
                     documents[i].append(token)
         return documents
-
-    def remove_stop_word(self, documents):
-        return PreprocessingUtils.remove_stop_word(documents, self.nlp)
 
     @staticmethod
     def remove_repeated_message_from_agent(message_history_list):

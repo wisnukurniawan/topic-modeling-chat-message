@@ -143,14 +143,14 @@ class PreprocessingUtils:
         return ' '.join(text_list)
 
     @staticmethod
-    def remove_stop_word(documents, nlp):
-        documents_tempt = []
-        for idx, item in enumerate(documents):
-            documents_tempt.append([])
-            for word in item:
-                if not nlp.vocab[word].is_stop:
-                    documents_tempt[idx].append(word)
-        return documents_tempt
+    def remove_stop_word(text, nlp):
+        text_list = []
+
+        for token in nlp.tokenizer(text):
+            token = str(token)
+            if not nlp.vocab[token].is_stop:
+                text_list.append(token)
+        return ' '.join(text_list)
 
     @staticmethod
     def remove_extra_space(text):

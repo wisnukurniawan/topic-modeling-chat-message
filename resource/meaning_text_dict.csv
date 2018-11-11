@@ -1,266 +1,266 @@
-lihat dulu              ,lihat_barang
-lihat koleksi           ,lihat_barang
-lihat detail            ,lihat_barang
-lihat produk            ,lihat_barang
-lihat diskon            ,lihat_diskon
-lihat promo             ,lihat_promo
-lihat syarat            ,lihat_syarat
-website kami            ,website_berrybenka
-website berrybenka      ,website_berrybenka
-tidak_bisa login        ,tidak_bisa_login
-login tidak_bisa        ,tidak_bisa_login
-login susah             ,tidak_bisa_login
-bukti bayar             ,bukti_pembayaran
-bukti transfer          ,bukti_pembayaran
-bukti resi              ,informasi_resi
-status transaksi        ,status_transaksi
-status order            ,status_pesan
-status proses           ,status_proses
-status pending          ,status_pending
-status pesan            ,status_pesan
-status tunggu           ,status_tunggu
-status shiped           ,status_shipped
-status shipped          ,status_shipped
-status approved         ,status_approved
-status picked           ,status_picked
-status approval         ,status_approval
-status delivered        ,status_delivered
-status kirim            ,status_pengiriman
-status tracking         ,status_pengiriman
-ganti alamat            ,ganti_alamat
-ganti nomer             ,ganti_nomer_telepon
-data                    ,data_pemesanan
-ganti ukur              ,ganti_ukuran
-ganti warna             ,ganti_warna
-ganti barang            ,ganti_barang
-ganti hitam             ,ganti_warna
-ganti putih             ,ganti_hitam
-ganti sepatu            ,ganti_sepatu
-ganti greenlight        ,ganti_warna
-ganti model             ,ganti_model
-ganti produk            ,ganti_produk
-ganti retur             ,ganti_retur
-ganti ongkos            ,ganti_ongkos_kirim
-ganti ekspedisi         ,ganti_ekpedisi
-ganti metode            ,ganti_metode_bayar
-kirim bukti             ,kirim_bukti_pembayaran
-kirim screenshoot       ,kirim_bukti_pembayaran
-kirim screen            ,kirim_bukti_pembayaran
-kirim resi              ,informasi_resi
-kirim foto              ,kirim_foto_barang
-kirim kondisi           ,kirim_foto_barang
-kirim produk            ,kirim_barang
-kirim barang            ,kirim_barang
-kirim order             ,kirim_barang
-kirim paket             ,kirim_barang
-kirim pakai             ,kirim_barang
-kirim alamat            ,kirim_alamat
-kirim gratis            ,kirim_gratis
-kirim bayar             ,ongkos_kirim
-kirim berat             ,ongkos_kirim
-kirim resi              ,informasi_resi
-kirim tanggal           ,waktu_pengiriman
-kirim hari              ,waktu_pengiriman
-kirim selasa            ,waktu_pengiriman
-kirim senin             ,waktu_pengiriman
-kirim kamis             ,waktu_pengiriman
-kirim rabu              ,waktu_pengiriman
-kirim jumat             ,waktu_pengiriman
-kirim besok             ,waktu_pengiriman
-kirim proses            ,waktu_pengiriman
-kirim sabtu             ,waktu_pengiriman
-kirim minggu            ,waktu_pengiriman
-konfirmasi bayar        ,konfirmasi_pembayaran
-konfirmasi pembayaran   ,konfirmasi_pembayaran
-konfimasi beli          ,konfirmasi_pembayaran
-konfimasi transfer      ,konfirmasi_pembayaran
-konfirmasi pesan        ,konfirmasi_pesanan
-konfirmasi estimasi     ,konfirmasi_pengiriman
-transaksi konfirmasi    ,konfirmasi_transaksi
-tidak_transaksi batal   ,transaksi_batal
-barang ganti            ,ganti_barang
-barang tukar            ,ganti_barang
-barang rusak            ,barang_rusak
-barang retur            ,ganti_barang
-barang refund           ,ganti_barang
-cancel order            ,batal_pesan
-cancel barang           ,batal_pesan
-pakai kartu             ,pembayaran_kartu_kredit
-pakai gojek             ,pembayaran_ojek
-pakai grab              ,pembayaran_ojek
-pakai klikbca           ,pembayaran_klik_bca
-pakai klik              ,pembayaran_klik_bca
-pakai transfer          ,pembayaran_transfer
-pakai kode              ,pembayaran_voucher
-pakai diskon            ,pembayaran_diskon
-berrybenka rekening     ,rekening_berrybenka
+lihat dulu,lihat_barang
+lihat koleksi,lihat_barang
+lihat detail,lihat_barang
+lihat produk,lihat_barang
+lihat diskon,lihat_diskon
+lihat promo,lihat_promo
+lihat syarat,lihat_syarat
+website kami,website_berrybenka
+website berrybenka,website_berrybenka
+tidak_bisa login,tidak_bisa_login
+login tidak_bisa,tidak_bisa_login
+login susah,tidak_bisa_login
+bukti bayar,bukti_pembayaran
+bukti transfer,bukti_pembayaran
+bukti resi,informasi_resi
+status transaksi,status_transaksi
+status order,status_pesan
+status proses,status_proses
+status pending,status_pending
+status pesan,status_pesan
+status tunggu,status_tunggu
+status shiped,status_shipped
+status shipped,status_shipped
+status approved,status_approved
+status picked,status_picked
+status approval,status_approval
+status delivered,status_delivered
+status kirim,status_pengiriman
+status tracking,status_pengiriman
+ganti alamat,ganti_alamat
+ganti nomer,ganti_nomer_telepon
+data,data_pemesanan
+ganti ukur,ganti_ukuran
+ganti warna,ganti_warna
+ganti barang,ganti_barang
+ganti hitam,ganti_warna
+ganti putih,ganti_hitam
+ganti sepatu,ganti_sepatu
+ganti greenlight,ganti_warna
+ganti model,ganti_model
+ganti produk,ganti_produk
+ganti retur,ganti_retur
+ganti ongkos,ganti_ongkos_kirim
+ganti ekspedisi,ganti_ekpedisi
+ganti metode,ganti_metode_bayar
+kirim bukti,kirim_bukti_pembayaran
+kirim screenshoot,kirim_bukti_pembayaran
+kirim screen,kirim_bukti_pembayaran
+kirim resi,informasi_resi
+kirim foto,kirim_foto_barang
+kirim kondisi,kirim_foto_barang
+kirim produk,kirim_barang
+kirim barang,kirim_barang
+kirim order,kirim_barang
+kirim paket,kirim_barang
+kirim pakai,kirim_barang
+kirim alamat,kirim_alamat
+kirim gratis,kirim_gratis
+kirim bayar,ongkos_kirim
+kirim berat,ongkos_kirim
+kirim resi,informasi_resi
+kirim tanggal,waktu_pengiriman
+kirim hari,waktu_pengiriman
+kirim selasa,waktu_pengiriman
+kirim senin,waktu_pengiriman
+kirim kamis,waktu_pengiriman
+kirim rabu,waktu_pengiriman
+kirim jumat,waktu_pengiriman
+kirim besok,waktu_pengiriman
+kirim proses,waktu_pengiriman
+kirim sabtu,waktu_pengiriman
+kirim minggu,waktu_pengiriman
+konfirmasi bayar,konfirmasi_pembayaran
+konfirmasi pembayaran,konfirmasi_pembayaran
+konfimasi beli,konfirmasi_pembayaran
+konfimasi transfer,konfirmasi_pembayaran
+konfirmasi pesan,konfirmasi_pesanan
+konfirmasi estimasi,konfirmasi_pengiriman
+transaksi konfirmasi,konfirmasi_transaksi
+tidak_transaksi batal,transaksi_batal
+barang ganti,ganti_barang
+barang tukar,ganti_barang
+barang rusak,barang_rusak
+barang retur,ganti_barang
+barang refund,ganti_barang
+cancel order,batal_pesan
+cancel barang,batal_pesan
+pakai kartu,pembayaran_kartu_kredit
+pakai gojek,pembayaran_ojek
+pakai grab,pembayaran_ojek
+pakai klikbca,pembayaran_klik_bca
+pakai klik,pembayaran_klik_bca
+pakai transfer,pembayaran_transfer
+pakai kode,pembayaran_voucher
+pakai diskon,pembayaran_diskon
+berrybenka rekening,rekening_berrybenka
 bank berrybenka rekening,rekening_berrybenka
-rekening berrybenka     ,rekening_berrybenka
+rekening berrybenka,rekening_berrybenka
 rekening bank berrybenka,rekening_berrybenka
-pesan salah             ,salah_pesanan
-salah account bayar     ,salah_bayar
-salah tulis             ,salah_alamat
-salah tulis alamat      ,salah_alamat
-salah masuk alamat      ,salah_alamat
-order salah             ,salah_order
-salah kirim             ,salah_kirim
-salah kode voucher      ,salah_kode_voucher
-salah pakai promo       ,salah_pakai_promo
-salah pakai diskon      ,salah_pakai_diskon
-salah alamat            ,salah_alamat
-salah kota              ,salah_alamat
-salah jalan             ,salah_alamat
-salah pesan             ,salah_pesanan
-salah order             ,salah_pesanan
-salah sistem            ,salah_sistem
-salah promo             ,salah_promo
-salah klik              ,salah_klik
-salah ketik             ,salah_ketik
-alamat lengkap          ,alamat_pengiriman
-order lengkap           ,format_order_lengkap
-order info              ,informasi_order
-bayar maksimal          ,lama_pembayaran_maksimal
-maksimal bayar          ,lama_pembayaran_maksimal
-maksimal mesan          ,maksimal_pesan
-tunggu bayar            ,menunggu_pembayaran
-tunggu kirim            ,menunggu_pembayaran
-tunggu bukti            ,menunggu_pembayaran
-tunggu barang           ,tunggu_barang
-warna hitam             ,warna_hitam
-warna putih             ,warna_putih
-warna gold              ,warna_gold
-warna coklat            ,warna_coklat
-warna biru              ,warna_biru
-warna green             ,warna_hijau
-warna hijau             ,warna_hijau
-warna navy              ,warna_navy
-warna peach             ,warna_peach
-warna pink              ,warna_pink
-warna marron            ,warna_marron
-warna maroon            ,warna_marron
-warna cream             ,warna_cream
-warna kuning            ,warna_kuning
-warna plum              ,warna_plum
-warna merah             ,warna_merah
-warna tosca             ,warna_tosca
-warna silver            ,warna_silver
-warna cappucino         ,warna_cappucino
-coup belle              ,coup_belle
-akun error              ,akun_error
-akun berrybenka         ,akun_berrybenka
-daftar akun berrybenka  ,akun_berrybenka
-harga rendah            ,harga_rendah
-berrybenka label        ,berrybenka_label
-cepat kirim             ,cepat_kirim
-cepat luntur            ,cepat_luntur
-cepat balas             ,cepat_balas_pesan
-tolong cepat balas      ,cepat_balas_pesan
-tolong fast respon      ,cepat_balas_pesan
-tolong diskon           ,minta_diskon
-tolong cancel           ,minta_membatalkan_pesanan
-tolong batal            ,minta_membatalkan_pesanan
-tolong dicancel         ,minta_membatalkan_pesanan
-jalan                   ,alamat_pengiriman
-info alamat             ,alamat_pengiriman
-tolong proses           ,tolong_proses
-kemarin order           ,pesanan_kemarin
-kemarin pesan           ,pesanan_kemarin
-order kemarin           ,pesanan_kemarin
-pesan kemarin           ,pesanan_kemarin
-kemarin bayar           ,pesanan_kemarin
-bayar kemarin           ,pesanan_kemarin
-beli kemarin            ,pesanan_kemarin
-kemarin kirim           ,kemarin_kirim
-kemarin verifikasi      ,kemarin_verifikasi
-batal pesan             ,pesanan_batal
-batal order             ,pesanan_batal
-order batal             ,pesanan_batal
-batal kode              ,pesanan_batal
-pesan batal             ,pesanan_batal
-tukar barang            ,tukar_barang
-tukar hitam             ,tukar_barang
-tukar ukur              ,tukar_barang
-tukar warna             ,tukar_barang
-barang tukar            ,tukar_barang
-tukar voucher           ,tukar_voucher
-live                    ,live_chat
-proses pesan            ,proses_pesanan
-pesan proses            ,proses_pesanan
-proses order            ,proses_pesanan
-proses refund           ,proses_refund
-proses kirim            ,proses_kirim
-proses bayar            ,proses_bayar
-bayar proses            ,proses_bayar
-tunggu proses           ,proses_tunggu
-proses tunggu           ,proses_tunggu
-proses retur            ,proses_retur
-proses return           ,proses_retur
-proses approval         ,proses_approval
-resi kirim              ,informasi_resi
-kirim resi              ,informasi_resi
-foto resi               ,informasi_resi
-nomer resi              ,informasi_resi
-resi kode               ,informasi_resi
-masuk ongkos            ,termasuk_ongkos_kirim
-tidak_masuk sabtu       ,tidak_masuk_libur
-sabtu minggu libur      ,tidak_masuk_libur
-tidak_masuk libur       ,tidak_masuk_libur
-masuk keranjang         ,masuk_keranjang
-masuk diskon            ,masuk_diskon
-masuk sistem            ,masuk_sistem
-bayar tunggu            ,tunggu_bayar
-tunggu order            ,tunggu_order
-tunggu proses           ,tunggu_proses
-tunggu kirim            ,tunggu_kirim
-tunggu estimasi         ,tunggu_estimasi
-tunggu barang           ,tunggu_barang
-ongkos kirim            ,ongkos_kirim
-total beli              ,total_harga
-order total             ,total_harga
-total order             ,total_harga
-total bayar             ,total_harga
-total biaya             ,total_harga
-grand total             ,total_harga
-total rupiah            ,total_harga
-total diskon            ,total_harga
-total transfer          ,total_harga
-bayar tanggal           ,tanggal_bayar
-tanggal order           ,tanggal_order
-tanggal merah           ,tanggal_merah
-kirim tanggal           ,tanggal_kirim
-promo tanggal           ,tanggal_promo
-ekspedisi tanggal       ,tanggal_ekspedisi
-barang emas             ,barang_kemas
-emas info               ,info_kemas
-pesan kemas             ,pesan_kemas
-proses emas             ,proses_kemas
-barang kemas            ,barang_kemas
-kemas utuh              ,kemas_utuh
-sedia tunggu            ,sedia_tunggu
-kirim sedia             ,kirim_sedia
-sedia ukur              ,sedia_ukuran
-produk sedia            ,produk_sedia
-sedia diskon            ,sedia_diskon
-diskon sedia            ,sedia_diskon
-estimasi kirim          ,estimasi_pengiriman
-estimasi bayar          ,estimasi_bayar
-estimasi kerja          ,estimasi_kerja
-estimasi refund         ,estimasi_refund
-minimal laku            ,minimal_berlaku
-minimal ribu            ,minimal_ribu
-minimal order           ,minimal_order
-minimal beli            ,minimal_pembelian
-minimal pmbelian        ,minimal_pembelian
-minimum order           ,minimum_order
-minimum beli            ,minumum_pembelian
-minimum ribu            ,minimum_ribu
-tunggu sebentar         ,tunggu_sebentar
-ubah pesan              ,ubah_pesan
-alamat ubah             ,ubah_alamat
-ubah password           ,ubah_password
-ubah metode bayar       ,ubah_metode_bayar
-ubah alamat             ,ubah_alamat
-alamat ubah             ,ubah_alamat
-ubah pembayaran         ,ubah_metode_bayar
-order ubah              ,ubah_order
-ubah data               ,ubah_data
+pesan salah,salah_pesanan
+salah account bayar,salah_bayar
+salah tulis,salah_alamat
+salah tulis alamat,salah_alamat
+salah masuk alamat,salah_alamat
+order salah,salah_order
+salah kirim,salah_kirim
+salah kode voucher,salah_kode_voucher
+salah pakai promo,salah_pakai_promo
+salah pakai diskon,salah_pakai_diskon
+salah alamat,salah_alamat
+salah kota,salah_alamat
+salah jalan,salah_alamat
+salah pesan,salah_pesanan
+salah order,salah_pesanan
+salah sistem,salah_sistem
+salah promo,salah_promo
+salah klik,salah_klik
+salah ketik,salah_ketik
+alamat lengkap,alamat_pengiriman
+order lengkap,format_order_lengkap
+order info,informasi_order
+bayar maksimal,lama_pembayaran_maksimal
+maksimal bayar,lama_pembayaran_maksimal
+maksimal mesan,maksimal_pesan
+tunggu bayar,menunggu_pembayaran
+tunggu kirim,menunggu_pembayaran
+tunggu bukti,menunggu_pembayaran
+tunggu barang,tunggu_barang
+warna hitam,warna_hitam
+warna putih,warna_putih
+warna gold,warna_gold
+warna coklat,warna_coklat
+warna biru,warna_biru
+warna green,warna_hijau
+warna hijau,warna_hijau
+warna navy,warna_navy
+warna peach,warna_peach
+warna pink,warna_pink
+warna marron,warna_marron
+warna maroon,warna_marron
+warna cream,warna_cream
+warna kuning,warna_kuning
+warna plum,warna_plum
+warna merah,warna_merah
+warna tosca,warna_tosca
+warna silver,warna_silver
+warna cappucino,warna_cappucino
+coup belle,coup_belle
+akun error,akun_error
+akun berrybenka,akun_berrybenka
+daftar akun berrybenka,akun_berrybenka
+harga rendah,harga_rendah
+berrybenka label,berrybenka_label
+cepat kirim,cepat_kirim
+cepat luntur,cepat_luntur
+cepat balas,cepat_balas_pesan
+tolong cepat balas,cepat_balas_pesan
+tolong fast respon,cepat_balas_pesan
+tolong diskon,minta_diskon
+tolong cancel,minta_membatalkan_pesanan
+tolong batal,minta_membatalkan_pesanan
+tolong dicancel,minta_membatalkan_pesanan
+jalan,alamat_pengiriman
+info alamat,alamat_pengiriman
+tolong proses,tolong_proses
+kemarin order,pesanan_kemarin
+kemarin pesan,pesanan_kemarin
+order kemarin,pesanan_kemarin
+pesan kemarin,pesanan_kemarin
+kemarin bayar,pesanan_kemarin
+bayar kemarin,pesanan_kemarin
+beli kemarin,pesanan_kemarin
+kemarin kirim,kemarin_kirim
+kemarin verifikasi,kemarin_verifikasi
+batal pesan,pesanan_batal
+batal order,pesanan_batal
+order batal,pesanan_batal
+batal kode,pesanan_batal
+pesan batal,pesanan_batal
+tukar barang,tukar_barang
+tukar hitam,tukar_barang
+tukar ukur,tukar_barang
+tukar warna,tukar_barang
+barang tukar,tukar_barang
+tukar voucher,tukar_voucher
+live,live_chat
+proses pesan,proses_pesanan
+pesan proses,proses_pesanan
+proses order,proses_pesanan
+proses refund,proses_refund
+proses kirim,proses_kirim
+proses bayar,proses_bayar
+bayar proses,proses_bayar
+tunggu proses,proses_tunggu
+proses tunggu,proses_tunggu
+proses retur,proses_retur
+proses return,proses_retur
+proses approval,proses_approval
+resi kirim,informasi_resi
+kirim resi,informasi_resi
+foto resi,informasi_resi
+nomer resi,informasi_resi
+resi kode,informasi_resi
+masuk ongkos,termasuk_ongkos_kirim
+tidak_masuk sabtu,tidak_masuk_libur
+sabtu minggu libur,tidak_masuk_libur
+tidak_masuk libur,tidak_masuk_libur
+masuk keranjang,masuk_keranjang
+masuk diskon,masuk_diskon
+masuk sistem,masuk_sistem
+bayar tunggu,tunggu_bayar
+tunggu order,tunggu_order
+tunggu proses,tunggu_proses
+tunggu kirim,tunggu_kirim
+tunggu estimasi,tunggu_estimasi
+tunggu barang,tunggu_barang
+ongkos kirim,ongkos_kirim
+total beli,total_harga
+order total,total_harga
+total order,total_harga
+total bayar,total_harga
+total biaya,total_harga
+grand total,total_harga
+total rupiah,total_harga
+total diskon,total_harga
+total transfer,total_harga
+bayar tanggal,tanggal_bayar
+tanggal order,tanggal_order
+tanggal merah,tanggal_merah
+kirim tanggal,tanggal_kirim
+promo tanggal,tanggal_promo
+ekspedisi tanggal,tanggal_ekspedisi
+barang emas,barang_kemas
+emas info,info_kemas
+pesan kemas,pesan_kemas
+proses emas,proses_kemas
+barang kemas,barang_kemas
+kemas utuh,kemas_utuh
+sedia tunggu,sedia_tunggu
+kirim sedia,kirim_sedia
+sedia ukur,sedia_ukuran
+produk sedia,produk_sedia
+sedia diskon,sedia_diskon
+diskon sedia,sedia_diskon
+estimasi kirim,estimasi_pengiriman
+estimasi bayar,estimasi_bayar
+estimasi kerja,estimasi_kerja
+estimasi refund,estimasi_refund
+minimal laku,minimal_berlaku
+minimal ribu,minimal_ribu
+minimal order,minimal_order
+minimal beli,minimal_pembelian
+minimal pmbelian,minimal_pembelian
+minimum order,minimum_order
+minimum beli,minumum_pembelian
+minimum ribu,minimum_ribu
+tunggu sebentar,tunggu_sebentar
+ubah pesan,ubah_pesan
+alamat ubah,ubah_alamat
+ubah password,ubah_password
+ubah metode bayar,ubah_metode_bayar
+ubah alamat,ubah_alamat
+alamat ubah,ubah_alamat
+ubah pembayaran,ubah_metode_bayar
+order ubah,ubah_order
+ubah data,ubah_data
