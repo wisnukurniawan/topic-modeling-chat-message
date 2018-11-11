@@ -1,6 +1,7 @@
 # Package
 resource/dataset/
 resource/example/
+resource/data_analysis/
 
 # Idea files
 .idea/*
@@ -12,3 +13,4 @@ __pycache__/
 playground.py
 playground2.py
 playground3.py
+playground4.py
