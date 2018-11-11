@@ -24,6 +24,7 @@ class Preprocessing(object):
         # init flash text
         self.keyword_processor_slang_word = KeywordProcessor()
         self.keyword_processor_emoticon = KeywordProcessor()
+        self.keyword_processor_meaning_text = KeywordProcessor()
 
         # init stemmer
         self.stemmer = StemmerFactory().create_stemmer()
@@ -43,6 +44,11 @@ class Preprocessing(object):
         for key, values in emoticon_raw:
             for value in values:
                 self.keyword_processor_emoticon.add_keyword(value, key)
+
+        # build meaning word corpus
+        slang_words_raw = Repository.get_meaning_text()
+        for word in slang_words_raw.values:
+            self.keyword_processor_slang_word.add_keyword(word[0], word[1])
 
     def __init_custom_stop_word(self):
         """ Custom stop word for chat message content. """
@@ -71,6 +77,31 @@ class Preprocessing(object):
                 chat_message.content = content
                 if content.strip():
                     chat_message_list_temp.append(chat_message)
+
+            logger.info(f'Pre-processing finished. {time.time() - start_time} seconds')
+        else:
+            logger.info('No chat message yet.')
+
+        return chat_message_list_temp
+
+    def cleaning_text(self, text):
+        """
+        Pre-processing the text.
+
+        :param text: dirty text.
+        :return: list of ChatMessage.
+        """
+        chat_message_list_temp = []
+
+        if text:
+            logger.info('Pre-processing started...')
+            start_time = time.time()
+            for chat_message in text:
+                print(f"before {chat_message}")
+                content = self.__preprocessing_flow(chat_message)
+                print(f"after {content}")
+                if content.strip():
+                    chat_message_list_temp.append(content)
 
             logger.info(f'Pre-processing finished. {time.time() - start_time} seconds')
         else:
@@ -129,13 +160,13 @@ class Preprocessing(object):
         content = PreprocessingUtils.remove_punctuation(content)
 
         # remove repeated character
-        content = PreprocessingUtils.remove_repeated_character(content)
+        content = PreprocessingUtilsV2.remove_repeated_character(content)
 
         # normalize slang word
         content = PreprocessingUtilsV2.normalize_slang_word(content, self.keyword_processor_slang_word)
 
         # stemming, tokenize, remove stop word
-        content = PreprocessingUtils.stemming_tokenize_and_remove_stop_word(content, self.nlp, self.stemmer)
+        content = PreprocessingUtils.stemming(content, self.nlp, self.stemmer)
 
         # remove unused character
         content = PreprocessingUtils.remove_unused_character(content)
@@ -146,6 +177,8 @@ class Preprocessing(object):
         # remove extra space between word
         content = PreprocessingUtils.remove_extra_space(content)
 
+        content = PreprocessingUtilsV2.normalize_meaning_word(content, self.keyword_processor_meaning_text)
+
         # TODO add another pre-processing if needed
 
         return content
@@ -154,12 +187,19 @@ class Preprocessing(object):
     def identify_phrase(documents):
         """ documents : iterable of iterable of str """
         bigram = Phraser(Phrases(documents, min_count=10, delimiter=b'_'))
+        trigram = Phraser(Phrases(bigram[documents], min_count=10, delimiter=b'_'))
 
         for i in range(len(documents)):
             for token in bigram[documents[i]]:
                 if '_' in token:
                     documents[i].append(token)
+            for token in trigram[documents[i]]:
+                if '_' in token:
+                    documents[i].append(token)
         return documents
+
+    def remove_stop_word(self, documents):
+        return PreprocessingUtils.remove_stop_word(documents, self.nlp)
 
     @staticmethod
     def remove_repeated_message_from_agent(message_history_list):
