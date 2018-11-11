@@ -132,7 +132,6 @@ class PreprocessingUtils:
     def stemming(text, nlp, stemmer):
         """ This func doing three process. It was stemming word with tokenize first. """
         text_list = []
-        text_list_temp = []
 
         for token in nlp.tokenizer(text):
             token = str(token)
@@ -141,7 +140,7 @@ class PreprocessingUtils:
             else:
                 text_list.append(token)
 
-        return ' '.join(text_list_temp)
+        return ' '.join(text_list)
 
     @staticmethod
     def remove_stop_word(documents, nlp):
