@@ -55,6 +55,9 @@ second
 kece
 tinggal
 kakak
+hello
+klik
+terimakasih
 """.split())
 
 EXC_STOP_WORD = set("""

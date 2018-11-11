@@ -15,6 +15,7 @@ bukti transfer,bukti_pembayaran
 bukti resi,informasi_resi
 status transaksi,status_transaksi
 status order,status_pesan
+status pesan,status_pesan
 status proses,status_proses
 status pending,status_pending
 status pesan,status_pesan
@@ -85,6 +86,8 @@ barang retur,ganti_barang
 barang refund,ganti_barang
 cancel order,batal_pesan
 cancel barang,batal_pesan
+batal order,batal_pesan
+batal barang,batal_pesan
 pakai kartu,pembayaran_kartu_kredit
 pakai gojek,pembayaran_ojek
 pakai grab,pembayaran_ojek
@@ -214,6 +217,11 @@ tunggu proses,tunggu_proses
 tunggu kirim,tunggu_kirim
 tunggu estimasi,tunggu_estimasi
 tunggu barang,tunggu_barang
+tunggu konfirmasi,tunggu_konfirmasi
+kami tunggu,kami_tunggu
+tunggu dengan estimasi,tunggu_dengan_estimasi
+mohon tunggu,mohon_tunggu
+tunggu update promo,tunggu_update_promo
 ongkos kirim,ongkos_kirim
 total beli,total_harga
 order total,total_harga
@@ -264,3 +272,8 @@ alamat ubah,ubah_alamat
 ubah pembayaran,ubah_metode_bayar
 order ubah,ubah_order
 ubah data,ubah_data
+kirim gagal,kirim_gagal
+beli laku,pembelian_berlaku
+promo diskon,promo_diskon
+beli produk,beli_produk
+beli minimal,beli_minimal

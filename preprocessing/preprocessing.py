@@ -86,31 +86,6 @@ class Preprocessing(object):
 
         return chat_message_list_temp
 
-    def cleaning_text(self, text):
-        """
-        Pre-processing the text.
-
-        :param text: dirty text.
-        :return: list of ChatMessage.
-        """
-        chat_message_list_temp = []
-
-        if text:
-            logger.info('Pre-processing started...')
-            start_time = time.time()
-            for chat_message in text:
-                print(f"before {chat_message}")
-                content = self.__preprocessing_flow(chat_message)
-                print(f"after {content}")
-                if content.strip():
-                    chat_message_list_temp.append(content)
-
-            logger.info(f'Pre-processing finished. {time.time() - start_time} seconds')
-        else:
-            logger.info('No chat message yet.')
-
-        return chat_message_list_temp
-
     def cleaning_with_pipe(self, chat_message_list):
         """
         [DEPRECATED]
@@ -162,7 +137,7 @@ class Preprocessing(object):
         content = PreprocessingUtils.remove_punctuation(content)
 
         # remove repeated character
-        content = PreprocessingUtilsV2.remove_repeated_character(content)
+        content = PreprocessingUtils.remove_repeated_character(content)
 
         # normalize slang word
         content = PreprocessingUtilsV2.normalize_slang_word(content, self.keyword_processor_slang_word)
@@ -192,8 +167,8 @@ class Preprocessing(object):
     @staticmethod
     def identify_phrase(documents):
         """ documents : iterable of iterable of str """
-        bigram = Phraser(Phrases(documents, min_count=10, delimiter=b'_'))
-        trigram = Phraser(Phrases(bigram[documents], min_count=10, delimiter=b'_'))
+        bigram = Phraser(Phrases(documents, min_count=5, delimiter=b'_', threshold=1))
+        trigram = Phraser(Phrases(bigram[documents], min_count=5, delimiter=b'_', threshold=1))
 
         for i in range(len(documents)):
             for token in bigram[documents[i]]:
@@ -208,6 +183,7 @@ class Preprocessing(object):
     def remove_repeated_message_from_agent(message_history_list):
         """ documents : removed repeated chat message if repeat more than constant.MESSAGE_TEMPLATE_MIN_COUNT"""
         message_template_list = []
+        message_history_list_temp = []
         counter = collections.Counter()
 
         for chat_message in message_history_list:
@@ -219,7 +195,7 @@ class Preprocessing(object):
                 message_template_list.append(key)
 
         for chat_message in message_history_list:
-            if chat_message.content in message_template_list:
-                chat_message.content = ""
+            if chat_message.content not in message_template_list:
+                message_history_list_temp.append(chat_message)
 
-        return message_history_list
+        return message_history_list_temp
