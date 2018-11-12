@@ -11,6 +11,7 @@ tidak_bisa login,tidak_bisa_login
 login tidak_bisa,tidak_bisa_login
 login susah,tidak_bisa_login
 bukti bayar,bukti_pembayaran
+bukti payment,bukti_pembayaran
 bukti transfer,bukti_pembayaran
 bukti resi,informasi_resi
 status transaksi,status_transaksi
@@ -160,9 +161,10 @@ cepat balas,cepat_balas_pesan
 tolong cepat balas,cepat_balas_pesan
 tolong fast respon,cepat_balas_pesan
 tolong diskon,minta_diskon
-tolong cancel,minta_membatalkan_pesanan
-tolong batal,minta_membatalkan_pesanan
-tolong dicancel,minta_membatalkan_pesanan
+tolong cancel,membatalkan_pesanan
+tolong batal,membatalkan_pesanan
+tolong cancel,membatalkan_pesanan
+tolong batal,membatalkan_pesanan
 jalan,alamat_pengiriman
 info alamat,alamat_pengiriman
 tolong proses,tolong_proses
@@ -223,6 +225,7 @@ tunggu dengan estimasi,tunggu_dengan_estimasi
 mohon tunggu,mohon_tunggu
 tunggu update promo,tunggu_update_promo
 ongkos kirim,ongkos_kirim
+biaya kirim,ongkos_kirim
 total beli,total_harga
 order total,total_harga
 total order,total_harga
@@ -277,3 +280,9 @@ beli laku,pembelian_berlaku
 promo diskon,promo_diskon
 beli produk,beli_produk
 beli minimal,beli_minimal
+link info,link_info
+extra diskon,extra_diskon
+pesan sandal,pesan_sandal
+bank mandiri,bank_mandiri
+bank bca,bank_bca
+bank bni,bank_bni

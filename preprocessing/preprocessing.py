@@ -46,9 +46,9 @@ class Preprocessing(object):
                 self.keyword_processor_emoticon.add_keyword(value, key)
 
         # build meaning word corpus
-        slang_words_raw = Repository.get_meaning_text()
-        for word in slang_words_raw.values:
-            self.keyword_processor_slang_word.add_keyword(word[0], word[1])
+        meaning_words_raw = Repository.get_meaning_text()
+        for word in meaning_words_raw.values:
+            self.keyword_processor_meaning_text.add_keyword(word[0], word[1])
 
     def __init_custom_stop_word(self):
         """ Custom stop word for chat message content. """
