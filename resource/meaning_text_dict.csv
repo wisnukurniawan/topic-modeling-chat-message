@@ -122,7 +122,6 @@ salah klik,salah_klik
 salah ketik,salah_ketik
 alamat lengkap,alamat_pengiriman
 order lengkap,format_order_lengkap
-order info,informasi_order
 bayar maksimal,lama_pembayaran_maksimal
 maksimal bayar,lama_pembayaran_maksimal
 maksimal mesan,maksimal_pesan
@@ -166,7 +165,6 @@ tolong batal,membatalkan_pesanan
 tolong cancel,membatalkan_pesanan
 tolong batal,membatalkan_pesanan
 jalan,alamat_pengiriman
-info alamat,alamat_pengiriman
 tolong proses,tolong_proses
 kemarin order,pesanan_kemarin
 kemarin pesan,pesanan_kemarin
@@ -297,3 +295,14 @@ sesuai dana,sesuai_dana
 sesuai sistem,sesuai_sistem
 sesuai gambar,sesuai_gambar
 sesuai kategori,sesuai_kategori
+order info,info_order
+info tanggal,info_tanggal
+link info,link_info
+info link,link_info
+link item,link_item
+link kode,link_kode
+link promo,link_promo
+link website,link_website
+kirim link,kirim_link
+akses link,akses_link
+item link,link_item
