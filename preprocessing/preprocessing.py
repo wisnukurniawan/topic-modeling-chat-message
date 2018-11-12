@@ -8,7 +8,7 @@ from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from gensim.models import Phrases
 from gensim.models.phrases import Phraser
 
-from preprocessing.utils import PreprocessingUtils, PreprocessingUtilsV2
+from preprocessing.preprocessing_utils import PreprocessingUtils, PreprocessingUtilsV2
 from utils import constant
 from repository.repository import Repository
 import collections
