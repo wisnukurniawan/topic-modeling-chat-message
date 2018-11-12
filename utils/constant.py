@@ -11,7 +11,7 @@ EMOTICON_LIST = (
 
 DELIMITER = '_'
 
-NUM_TOPICS = 10
+NUM_TOPICS = 5
 
 MESSAGE_TEMPLATE_MIN_COUNT = 10
 
@@ -58,6 +58,7 @@ kakak
 hello
 klik
 terimakasih
+halo
 """.split())
 
 EXC_STOP_WORD = set("""
