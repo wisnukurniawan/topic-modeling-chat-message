@@ -50,6 +50,28 @@ chat
 informasi
 form
 hallo
+ukur
+second
+kece
+tinggal
+kakak
+hello
+klik
+terimakasih
+halo
+bisa
+tidak_bisa
+rupiah
+arti
+sesuai
+alamat
+ulang
+laku
+beda
+coba
+maksud
+tulis
+antri
 """.split())
 
 EXC_STOP_WORD = set("""

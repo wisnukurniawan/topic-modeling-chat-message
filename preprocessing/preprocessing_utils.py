@@ -3,6 +3,7 @@ from urllib.parse import urlparse
 
 from utils import constant
 from repository.repository import Repository
+import itertools
 
 
 class PreprocessingUtils:
@@ -128,12 +129,10 @@ class PreprocessingUtils:
         return ' '.join(text_list)
 
     @staticmethod
-    def stemming_tokenize_and_remove_stop_word(text, nlp, stemmer):
-        """ This func doing three process. It was stemming word, tokenize and then remove stop word. """
+    def stemming(text, nlp, stemmer):
+        """ This func doing three process. It was stemming word with tokenize first. """
         text_list = []
-        text_list_temp = []
 
-        # stemming
         for token in nlp.tokenizer(text):
             token = str(token)
             if constant.DELIMITER not in token:
@@ -141,12 +140,17 @@ class PreprocessingUtils:
             else:
                 text_list.append(token)
 
-        # remove stop words
-        for word in text_list:
-            if not nlp.vocab[word].is_stop:
-                text_list_temp.append(word)
+        return ' '.join(text_list)
 
-        return ' '.join(text_list_temp)
+    @staticmethod
+    def remove_stop_word(text, nlp):
+        text_list = []
+
+        for token in nlp.tokenizer(text):
+            token = str(token)
+            if not nlp.vocab[token].is_stop:
+                text_list.append(token)
+        return ' '.join(text_list)
 
     @staticmethod
     def remove_extra_space(text):
@@ -192,3 +196,14 @@ class PreprocessingUtilsV2:
         :return: (str) text has been normalize.
         """
         return keyword_processor.replace_keywords(text)
+
+    @staticmethod
+    def normalize_meaning_word(text, keyword_processor):
+        return keyword_processor.replace_keywords(text)
+
+    @staticmethod
+    def remove_repeated_character(text):
+        """
+        Remove repeated character more than one in text
+        """
+        return ''.join(character for character, _ in itertools.groupby(text))

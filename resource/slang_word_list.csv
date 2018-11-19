@@ -27,6 +27,8 @@ bg,abang
 bgg,bingung
 bgian,bagian
 bgmn,bagaimana
+gmna,bagaimana
+okay,oke
 bgs,bagus
 bgt,banget
 bgtu,begitu
@@ -122,7 +124,7 @@ dtg,datang
 dtng,datang
 elo,kamu
 elu,kamu
-elu ,kamu
+elu,kamu
 emg,memang
 emng,memang
 engga',tidak
@@ -218,7 +220,7 @@ kmrn,kemarin
 knp,kenapa
 kongkrit,kongkret
 kpn,kapan
-krg ,kurang
+krg,kurang
 krm,kirim
 krn,karena
 krng,kurang
@@ -235,13 +237,13 @@ lht,lihat
 liat,lihat
 lk,laki-laki
 lo,kamu
-lol ,tawa
+lol,tawa
 lom,belum
 lp,lupa
 lpa,lupa
 lpr,lapar
 lu,kamu
-lum ,belum
+lum,belum
 maap,maaf
 maba,mahasiswa baru
 makacih,terima kasih
@@ -382,7 +384,7 @@ sng,senang
 sngt,sangat
 snin,senin
 snyum,senyum
-sono ,sana
+sono,sana
 sp,siapa
 spa,siapa
 sprti,seperti
@@ -428,7 +430,7 @@ trims,terima kasih
 trs,terus
 trus,terus
 ttp,tetap
-ttp ,tetap
+ttp,tetap
 tu,itu
 tu2p,tutup
 tugs,tugas
@@ -831,7 +833,6 @@ imho,in my humble opinion
 imoet,imut
 imoetz,imut
 info,informasi
-item,hitam
 itung,hitung
 itungan,hitungan
 iy,iya
@@ -1361,6 +1362,7 @@ tmpah,tumpah
 tmph,tumpah
 tnda,tanda
 tngu,tunggu
+di tunggu,tunggu
 tnh,tanah
 tnyta,ternyata
 togel,toto gelap
@@ -1435,13 +1437,17 @@ yup,iya
 ywdh,ya sudah
 tf,transfer
 po,preorder
-mesen,mesan
+ordernya,order
+diorder,order
+mesen,pesan
+mesan,pesan
 mksdx,maksudnya
 namax,namanya
 nmax,namanya
 barangx,barangnya
 yaa,ya
 dongg,dong
+donk,dong
 dptin,mendapatkan
 ulg,ulang
 ulng,ulang
@@ -1465,15 +1471,10 @@ disc,diskon
 discount,diskon
 black,hitam
 prmo,promo
+promonya,promo
 wa,whatsapp
 lgsng,langsung
 ig,instagram
-yaah,kecewa
-yah,kecewa
-yahh,kecewa
-yahhh,kecewa
-yaahh,kecewa
-yaaah,kecewa
 nyampe,sampai
 sz,ukuran
 size,ukuran
@@ -1542,20 +1543,19 @@ brpaan,berapaan
 klau,kalau
 wahh,wah
 aj,aja
+iyaa,iya
 hhu,huhu
 hiihi,hihi
 yeaaay,iya
 hrga,harga
-kirakira,kira kira
-yaahh,kecewa
+kirakira,kira-kira
 pic,gambar
 makasiih,terima kasih
 nggk,tidak
 tida,tidak
 tdak,tidak
 kaaakk,kak
-halooo,hai
-wahhh,kecewa
+halooo,halo
 makasihhh,terima kasih
 thankyouu,terima kasih
 thankyou,terima kasih
@@ -1572,9 +1572,17 @@ okee,oke
 dear,kepada
 mbak,kak
 mba,kak
-s,kecil
-m,sedang
-l,besar
-xl,sangat besar
-xxl,sangat sangat besar
 banyakk,banyak
+pembatalanya,batal
+batalin,batal
+rubah,ubah
+cancel,batal
+dicancel,batal
+product,produk
+discount,diskon
+memasukan,masuk
+hola,halo
+cancelin,batal
+dicancel,batal
+haloo,halo
+iyap,iya

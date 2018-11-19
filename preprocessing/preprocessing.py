@@ -8,7 +8,7 @@ from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 from gensim.models import Phrases
 from gensim.models.phrases import Phraser
 
-from preprocessing.utils import PreprocessingUtils, PreprocessingUtilsV2
+from preprocessing.preprocessing_utils import PreprocessingUtils, PreprocessingUtilsV2
 from utils import constant
 from repository.repository import Repository
 import collections
@@ -24,6 +24,7 @@ class Preprocessing(object):
         # init flash text
         self.keyword_processor_slang_word = KeywordProcessor()
         self.keyword_processor_emoticon = KeywordProcessor()
+        self.keyword_processor_meaning_text = KeywordProcessor()
 
         # init stemmer
         self.stemmer = StemmerFactory().create_stemmer()
@@ -43,6 +44,11 @@ class Preprocessing(object):
         for key, values in emoticon_raw:
             for value in values:
                 self.keyword_processor_emoticon.add_keyword(value, key)
+
+        # build meaning word corpus
+        meaning_words_raw = Repository.get_meaning_text()
+        for word in meaning_words_raw.values:
+            self.keyword_processor_meaning_text.add_keyword(word[0], word[1])
 
     def __init_custom_stop_word(self):
         """ Custom stop word for chat message content. """
@@ -65,11 +71,11 @@ class Preprocessing(object):
         if chat_message_list:
             logger.info('Pre-processing started...')
             start_time = time.time()
-
-            chat_message_list_clean = self.remove_repeated_message_from_agent(chat_message_list)
-
-            for chat_message in chat_message_list_clean:
+            chat_message_list = self.remove_repeated_message_from_agent(chat_message_list)
+            for chat_message in chat_message_list:
+                logger.info(f'BEFORE -> {chat_message.content}')
                 content = self.__preprocessing_flow(chat_message.content)
+                logger.info(f'AFTER -> {content}')
                 chat_message.content = content
                 if content.strip():
                     chat_message_list_temp.append(chat_message)
@@ -137,7 +143,7 @@ class Preprocessing(object):
         content = PreprocessingUtilsV2.normalize_slang_word(content, self.keyword_processor_slang_word)
 
         # stemming, tokenize, remove stop word
-        content = PreprocessingUtils.stemming_tokenize_and_remove_stop_word(content, self.nlp, self.stemmer)
+        content = PreprocessingUtils.stemming(content, self.nlp, self.stemmer)
 
         # remove unused character
         content = PreprocessingUtils.remove_unused_character(content)
@@ -148,6 +154,12 @@ class Preprocessing(object):
         # remove extra space between word
         content = PreprocessingUtils.remove_extra_space(content)
 
+        # normalize word
+        content = PreprocessingUtilsV2.normalize_meaning_word(content, self.keyword_processor_meaning_text)
+
+        # remove stop word
+        content = PreprocessingUtils.remove_stop_word(content, self.nlp)
+
         # TODO add another pre-processing if needed
 
         return content
@@ -155,10 +167,14 @@ class Preprocessing(object):
     @staticmethod
     def identify_phrase(documents):
         """ documents : iterable of iterable of str """
-        bigram = Phraser(Phrases(documents, min_count=10, delimiter=b'_'))
+        bigram = Phraser(Phrases(documents, min_count=5, delimiter=b'_', threshold=1))
+        trigram = Phraser(Phrases(bigram[documents], min_count=5, delimiter=b'_', threshold=1))
 
         for i in range(len(documents)):
             for token in bigram[documents[i]]:
+                if '_' in token:
+                    documents[i].append(token)
+            for token in trigram[documents[i]]:
                 if '_' in token:
                     documents[i].append(token)
         return documents
@@ -167,6 +183,7 @@ class Preprocessing(object):
     def remove_repeated_message_from_agent(message_history_list):
         """ documents : removed repeated chat message if repeat more than constant.MESSAGE_TEMPLATE_MIN_COUNT"""
         message_template_list = []
+        message_history_list_temp = []
         counter = collections.Counter()
 
         for chat_message in message_history_list:
@@ -178,7 +195,7 @@ class Preprocessing(object):
                 message_template_list.append(key)
 
         for chat_message in message_history_list:
-            if chat_message.content in message_template_list:
-                chat_message.content = ""
+            if chat_message.content not in message_template_list:
+                message_history_list_temp.append(chat_message)
 
-        return message_history_list
+        return message_history_list_temp

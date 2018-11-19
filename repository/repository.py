@@ -56,3 +56,7 @@ class Repository(object):
     @staticmethod
     def get_slang_word():
         return pandas.read_csv('resource/slang_word_list.csv', sep=',', header=None)
+
+    @staticmethod
+    def get_meaning_text():
+        return pandas.read_csv('resource/meaning_text_dict.csv', sep=',', header=None)
